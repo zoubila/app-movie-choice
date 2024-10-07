@@ -1,0 +1,13 @@
+#<IfModule mod_rewrite.c>
+#    RewriteEngine On
+#
+#    # Réécrit toutes les requêtes vers index.php
+#    RewriteRule ^ index.php [QSA,L]
+#</IfModule>
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Réécrit toutes les requêtes vers index.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [QSA,L]
+</IfModule>

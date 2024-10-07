@@ -12,3 +12,5 @@
 /docker/
 /composer.lock
 ###< symfony/framework-bundle ###
+github
+github.pub
