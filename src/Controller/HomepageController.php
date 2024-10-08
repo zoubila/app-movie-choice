@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class HomepageController extends AbstractController
 {
+    #[Route('/homepage')]
     #[Route('/')]
     public function default(): Response      
     {

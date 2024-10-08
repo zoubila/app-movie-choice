@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\admin;
+namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Attribute\Route;
@@ -15,13 +15,18 @@ class MovieController extends AbstractController
     {
         $movies = $entityManager->getRepository(Movie::class)->findAll();
     
-        $content = '<h1>Movies</h1><ul>';
-        foreach ($movies as $movie) {
-            $content .= sprintf('<li>%s - %s</li>', $movie->getTitle(), $movie->getReleaseDate()->format('Y-m-d'));
-        }
-        $content .= '</ul>';
+        // $content = '<h1>Movies</h1><ul>';
+        // foreach ($movies as $movie) {
+        //     $content .= sprintf('<li>%s - %s</li>', $movie->getTitle(), $movie->getReleaseDate()->format('Y-m-d'));
+        // }
+        // $content .= '</ul>';
+
+        return $this->render('movies/listMovies.html.twig', [
+            'movies'=> $movies,
+            'test' => true,
+        ]);
     
-        return new Response($content);
+        // return new Response($content);
     }
 
     #[Route('/add-movie', name: 'add_movie')]

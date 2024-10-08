@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Films{% endblock %}
+{% block body %}
+    <h1>Liste des Films</h1>
+    <ul>
+        {% for movie in movies %}
+            <li>{{ movie.title }} - Sortie le {{ movie.releaseDate|date('d/m/Y') }}</li>
+        {% else %}
+            <li>Aucun film disponible.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
