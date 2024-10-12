@@ -2,12 +2,14 @@
 
 {% block title %}Liste des Films{% endblock %}
 {% block body %}
-    <h1>Liste des Films</h1>
-    <ul>
+    <h1 class="my-4">Liste des Films</h1>
+    <ul class="list-group">
         {% for movie in movies %}
-            <li>{{ movie.title }} - Sortie le {{ movie.releaseDate|date('d/m/Y') }}</li>
+            <li class="list-group-item">
+                <strong>{{ movie.title }}</strong> - Sortie le {{ movie.releaseDate|date('d/m/Y') }}
+            </li>
         {% else %}
-            <li>Aucun film disponible.</li>
+            <li class="list-group-item">Aucun film disponible.</li>
         {% endfor %}
     </ul>
 {% endblock %}

@@ -1,0 +1,14 @@
+// Variables personnalisées (avant l'import de Bootstrap)
+//$primary: #ff5722; // Exemple de couleur primaire personnalisée
+
+
+@import "~bootstrap/scss/bootstrap";
+
+body {
+    background-color: lightgray;
+}
+
+.container {
+    padding-top: 1em !important;
+    padding-bottom: 1em !important;
+}
