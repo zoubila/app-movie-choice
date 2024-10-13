@@ -16,7 +16,7 @@ class MovieController extends AbstractController
     public function listMovies(EntityManagerInterface $entityManager): Response
     {
         $movies = $entityManager->getRepository(Movie::class)->findAll();
-
+        
         return $this->render('movies/listMovies.html.twig', [
             'movies'=> $movies,
             'test' => true,
