@@ -5,8 +5,10 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Entity\Movie;
+use App\Form\MovieType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 
 class MovieController extends AbstractController
 {
@@ -14,32 +16,37 @@ class MovieController extends AbstractController
     public function listMovies(EntityManagerInterface $entityManager): Response
     {
         $movies = $entityManager->getRepository(Movie::class)->findAll();
-    
-        // $content = '<h1>Movies</h1><ul>';
-        // foreach ($movies as $movie) {
-        //     $content .= sprintf('<li>%s - %s</li>', $movie->getTitle(), $movie->getReleaseDate()->format('Y-m-d'));
-        // }
-        // $content .= '</ul>';
 
         return $this->render('movies/listMovies.html.twig', [
             'movies'=> $movies,
             'test' => true,
         ]);
-    
-        // return new Response($content);
     }
 
     #[Route('/add-movie', name: 'add_movie')]
-    public function addMovie(EntityManagerInterface $entityManager): Response
+    public function addMovie(Request $request, EntityManagerInterface $entityManager): Response
     {
         $movie = new Movie();
-        $movie->setTitle('Inception');
-        $movie->setReleaseDate(new \DateTime('2010-07-16'));
 
-        $entityManager->persist($movie);
-        $entityManager->flush();
+        // Création du formulaire
+        $form = $this->createForm(MovieType::class, $movie);
 
-        return new Response('Saved new movie with id '.$movie->getId());
+        // Gestion de la soumission du formulaire
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Sauvegarde en base de données
+            $entityManager->persist($movie);
+            $entityManager->flush();
+
+            // Redirection ou message de succès
+            return $this->redirectToRoute('list_movies');
+        }
+
+        // Afficher le formulaire
+        return $this->render('movies/add_movie.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
     #[Route('/search-movie/{title}', name: 'search_movie')]

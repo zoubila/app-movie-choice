@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add Movie{% endblock %}
+
+{% block body %}
+    <h1>Add a New Movie</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.title) }}
+        {{ form_row(form.releaseDate) }}
+        {{ form_row(form.save) }}
+    {{ form_end(form) }}
+{% endblock %}
