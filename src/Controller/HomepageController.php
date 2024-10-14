@@ -1,5 +1,5 @@
 <?php
-// src/Controller/LuckyController.php
+
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -8,12 +8,15 @@ use Symfony\Component\HttpFoundation\Response;
 
 class HomepageController extends AbstractController
 {
-    #[Route('/homepage')]
+    #[Route('/homepage', name:'homepage')]
     #[Route('/')]
-    public function default(): Response      
+    public function default(): Response 
     {
+        $user = $this->getUser();
+
         return $this->render('base.html.twig', [
             'test' => true,
+            'user' => $user
         ]);
     }
 }
