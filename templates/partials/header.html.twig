@@ -1,56 +1,21 @@
-<header>
-    {# <nav class="nav-extended">
-        <div class="nav-wrapper">
-            <a href="#" class="brand-logo">Logo</a>
-            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li class="tab"><a href="{{ path('app_register') }}">Connexion</a></li>
-            </ul>
-        </div>
-        <div class="nav-content">
-            <ul class="tabs tabs-transparent">
-                <li class="tab"><a href="/">Accueil</a></li>
-                <li class="tab"><a class="active" href="{{ path('list_movies') }}">Liste filmls</a></li>
-                <li class="tab"><a href="{{ path('add_movie') }}">Ajout d'un film</a></li>
-            </ul>
-        </div>
-    </nav> #}
+<div class="container">
+  <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+    <div class="col-md-3 mb-2 mb-md-0">
+      <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+        <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
+      </a>
+    </div>
 
-    {# <ul class="sidenav" id="mobile-demo">
-        <li class="tab"><a href="{{ path('app_register') }}">Connexion</a></li>
+    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+      <li><a href="{{ path('homepage') }}" class="nav-link px-2 link-secondary">Maison</a></li>
+      <li><a href="{{ path('list_movies') }}" class="nav-link px-2">Liste films</a></li>
+      <li><a href="{{ path('add_movie') }}" class="nav-link px-2">Ajouter un film</a></li>
+      <li><a href="#" class="nav-link px-2">FAQs</a></li>
     </ul>
-     #}
 
-
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Quoi Que Je Fais v0.0.1</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="{{ path('homepage') }}">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Films</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Admin
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="{{ path('add_movie') }}">Ajouter un film</a>
-          <a class="dropdown-item" href="{{ path('list_movies') }}">Liste Film</a>
-          <a class="dropdown-item" href="#">Gestion utilisateurs</a>
-          
-        </div>
-      </li>
-    </ul>
-  </div>
-</nav>
-
-
-</header>
+    <div class="col-md-3 text-end">
+      <a href="{{ path('app_login') }}"><button type="button" class="btn btn-outline-primary me-2">Connexion</button></a>
+      <a href="{{ path('app_register') }}"><button type="button" class="btn btn-primary">Créer un compte</button></a>
+    </div>
+  </header>
+</div>
