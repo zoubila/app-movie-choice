@@ -3,21 +3,37 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-
-        <h1>Register</h1>
+    <main class="form-signin w-100 m-auto">
+        <div class="d-flex justify-content-center" style="padding:10%;">
+            <img src="{{ asset('images/contrat.png') }}" alt="Login Image" width="50%">
+        </div>
+        <h1 class="h3 mb-3 fw-normal">Inscrivez-vous</h1>
 
             {{ form_errors(registrationForm) }}
 
             {{ form_start(registrationForm) }}
-            {{ form_row(registrationForm.email) }}
-            {{ form_row(registrationForm.agreeTerms) }}
+            <div class="form-floating">
+                {{ form_row(registrationForm.email, {
+                    'label_attr': {'class': 'form-label','for':'floatingInput'},
+                    'attr': {'class': 'form-control', 'id':'floatingInput'}
+                }) 
+                }}
+            </div>
+            <br>
             {{ form_row(registrationForm.plainPassword, {
-                label: 'Password'
+                'label': 'Password',
+                'label_attr': {'class': 'form-label'},
+                'attr': {'class': 'form-control'}
             }) }}
-
             
+            {{ form_row(registrationForm.agreeTerms, {
+                'label_attr': {'class': 'form-check-label'},
+                'attr': {'class': 'form-check-input'}
+            }) }}
+            <br>
+            <button class="btn btn-primary w-100 py-2" type="submit">Inscription</button>
 
-        <button type="submit" class="btn">Register</button>
     {{ form_end(registrationForm) }}
 
+    </main>
 {% endblock %}
