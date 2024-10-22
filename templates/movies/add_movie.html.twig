@@ -1,13 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Add Movie{% endblock %}
+{% block title %}Ajouter un film{% endblock %}
 
 {% block body %}
-    <h1>Add a New Movie</h1>
+<main class="form-signin w-100 m-auto">
+    <h1>Ajouter un nouveau film</h1>
 
     {{ form_start(form) }}
-        {{ form_row(form.title) }}
-        {{ form_row(form.releaseDate) }}
-        {{ form_row(form.save) }}
+    <div class="form-floating">
+        {{ form_row(form.title,{
+            'label': 'Titre du film',
+            'label_attr': {'class':'form-label'},
+            'attr': {'class':'form-control'}
+        }) }}
+        {{ form_row(form.releaseDate,{
+            'label': 'Date de sorie',
+            'label_attr':{'class':'form-label'},
+            'attr':{'class':'form-control'}
+        }) }}
+        <br>
+        {{ form_row(form.save,{
+            'attr' :{'class':'btn btn-primary w-100 py-2'},
+            'label':'Ajouter film'
+        }) }}
+    </div>
     {{ form_end(form) }}
+</main>
 {% endblock %}

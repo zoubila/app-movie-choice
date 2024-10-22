@@ -13,9 +13,17 @@
       <li><a href="#" class="nav-link px-2">FAQs</a></li>
     </ul>
 
-    <div class="col-md-3 text-end">
-      <a href="{{ path('app_login') }}"><button type="button" class="btn btn-outline-primary me-2">Connexion</button></a>
-      <a href="{{ path('app_register') }}"><button type="button" class="btn btn-primary">Créer un compte</button></a>
-    </div>
+    {% if user %}
+      <div class="col-md-3 text-end">
+        <a href="#"><button type="button" class="btn btn-outline-primary me-2">Profil</button></a>
+        <a href="{{ path('app_logout') }}"><button type="button" class="btn btn-primary">Déconnexion</button></a>
+      </div>
+    {% else %}
+      <div class="col-md-3 text-end">
+        <a href="{{ path('app_login') }}"><button type="button" class="btn btn-outline-primary me-2">Connexion</button></a>
+        <a href="{{ path('app_register') }}"><button type="button" class="btn btn-primary">Créer un compte</button></a>
+      </div>
+    {% endif %}
+
   </header>
 </div>

@@ -4,33 +4,34 @@
 
 {% block body %}
     <main class="form-signin w-100 m-auto">
+            {{ form_errors(registrationForm) }}
+
+            {{ form_start(registrationForm) }}
         <div class="d-flex justify-content-center" style="padding:10%;">
             <img src="{{ asset('images/contrat.png') }}" alt="Login Image" width="50%">
         </div>
         <h1 class="h3 mb-3 fw-normal">Inscrivez-vous</h1>
 
-            {{ form_errors(registrationForm) }}
-
-            {{ form_start(registrationForm) }}
             <div class="form-floating">
                 {{ form_row(registrationForm.email, {
-                    'label_attr': {'class': 'form-label','for':'floatingInput'},
+                    'label_attr': {'for':'floatingInput'},
                     'attr': {'class': 'form-control', 'id':'floatingInput'}
                 }) 
                 }}
             </div>
-            <br>
-            {{ form_row(registrationForm.plainPassword, {
-                'label': 'Password',
-                'label_attr': {'class': 'form-label'},
-                'attr': {'class': 'form-control'}
-            }) }}
-            
-            {{ form_row(registrationForm.agreeTerms, {
-                'label_attr': {'class': 'form-check-label'},
-                'attr': {'class': 'form-check-input'}
-            }) }}
-            <br>
+            <div class="form-floating">
+                {{ form_row(registrationForm.plainPassword, {
+                    'label': 'Password',
+                    'label_attr': {'class': 'form-label'},
+                    'attr': {'class': 'form-control'}
+                }) }}
+            </div>
+            <div class="form-check text-start my-3">
+                {{ form_row(registrationForm.agreeTerms, {
+                    'label_attr': {'class': 'form-check-label'},
+                    'attr': {'class': 'form-check-input'}
+                }) }}
+            </div>
             <button class="btn btn-primary w-100 py-2" type="submit">Inscription</button>
 
     {{ form_end(registrationForm) }}

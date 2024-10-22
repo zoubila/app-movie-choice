@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Entity\Movie;
+use App\Entity\User;
 use App\Form\MovieType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,15 +18,19 @@ class MovieController extends AbstractController
     {
         $movies = $entityManager->getRepository(Movie::class)->findAll();
         
+        $user = $this->getUser();
+
         return $this->render('movies/listMovies.html.twig', [
             'movies'=> $movies,
-            'test' => true,
+            'user' => $user,
         ]);
     }
 
     #[Route('/add-movie', name: 'add_movie')]
     public function addMovie(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $user = $this->getUser();
+
         $movie = new Movie();
 
         // Création du formulaire
@@ -46,6 +51,7 @@ class MovieController extends AbstractController
         // Afficher le formulaire
         return $this->render('movies/add_movie.html.twig', [
             'form' => $form->createView(),
+            'user'=> $user,
         ]);
     }
 
