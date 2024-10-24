@@ -10,9 +10,16 @@ use App\Form\MovieType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use App\Service\MovieApiService;
 
 class MovieController extends AbstractController
 {
+    private MovieApiService $movieApiService;
+    public function __construct(MovieApiService $movieApiService)
+    {
+        $this->movieApiService = $movieApiService;
+    }
+    
     #[Route('/movies', name: 'list_movies')]
     public function listMovies(EntityManagerInterface $entityManager): Response
     {
@@ -71,6 +78,22 @@ class MovieController extends AbstractController
         $content .= '</ul>';
 
         return new Response($content);
+    }
+
+    #[Route('/movie-proposal', name: 'movie_proposal')]
+    public function api_moviePropostion(Request $request, MovieApiService $movieApiService): Response
+    {
+        $user = $this->getUser();
+
+        $apiContent = $this->movieApiService->makeApiRequest('trending/movie/week', [
+            'language' => 'fr'
+        ]);
+
+        return $this->render('movies/movie_proposal.html.twig', [
+            // 'form' => $form->createView(),
+            'user'=> $user,
+            'api_content'=> $apiContent,
+        ]);
     }
 
 }

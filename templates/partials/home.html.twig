@@ -12,7 +12,7 @@
               <div class="carousel-caption text-start">
                 <h1>Quoi que je regarde ?</h1>
                 <p class="opacity-75">Viens, je te vais te proposer un film que tu ne connais pas en fonction de tes gouts et je vais même te dire ou tu peux le regarder si tu as de la chance</p>
-                <p><a class="btn btn-lg btn-primary" href="#">Propose un film</a></p>
+                <p><a class="btn btn-lg btn-primary" href="{{ path('movie_proposal') }}">Propose un film</a></p>
               </div>
             </div>
           </div>
@@ -45,5 +45,8 @@
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
         </button>
+      </div>
+      <div class="container">
+        {{ api_content.page }}
       </div>
 </div>
