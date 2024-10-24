@@ -47,6 +47,15 @@
         </button>
       </div>
       <div class="container">
-        {{ api_content.page }}
+        {% for movie in api_content.results %}
+          <div class="movie">
+              <h2>{{ movie.title }} ({{ movie.release_date }})</h2>
+              <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="Poster of {{ movie.title }}">
+              <p>{{ movie.overview }}</p>
+              <p><strong>Note :</strong> {{ movie.vote_average }}/10 ({{ movie.vote_count }} votes)</p>
+              <p><strong>Genres :</strong> {{ movie.genre_ids | join(', ') }}</p>
+              <p><strong>Popularité :</strong> {{ movie.popularity }}</p>
+          </div>
+        {% endfor %}
       </div>
 </div>
