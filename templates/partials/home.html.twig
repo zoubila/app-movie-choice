@@ -46,16 +46,18 @@
           <span class="visually-hidden">Next</span>
         </button>
       </div>
-      <div class="container">
+
+      <div class="row">
         {% for movie in api_content.results %}
-          <div class="movie">
-              <h2>{{ movie.title }} ({{ movie.release_date }})</h2>
-              <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="Poster of {{ movie.title }}">
-              <p>{{ movie.overview }}</p>
-              <p><strong>Note :</strong> {{ movie.vote_average }}/10 ({{ movie.vote_count }} votes)</p>
-              <p><strong>Genres :</strong> {{ movie.genre_ids | join(', ') }}</p>
-              <p><strong>Popularité :</strong> {{ movie.popularity }}</p>
+          <div class="col-sm-3 mb-3 mb-sm-0 movie-cards-home">
+            <div class="card-body">
+              <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" class="card-img-top" alt="...">
+              <h5 class="card-title">{{ movie.title }}</h5>
+              <p class="card-text">{{ movie.overview|length > 50 ? movie.overview|slice(0, 100) ~ '...' : movie.overview  }}</p>
+              <p class="card-text" label="{{ movie.release_date }}">{{ movie.release_date|date('Y') }}</p>
+              <p class="card-text">{{ movie.vote_average }}/10 ({{ movie.vote_count }} votes)</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
           </div>
         {% endfor %}
       </div>
-</div>
