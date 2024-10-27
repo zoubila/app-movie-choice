@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Entity\Movie;
@@ -43,7 +44,7 @@ class MovieController extends AbstractController
         // Création du formulaire
         $form = $this->createForm(MovieType::class, $movie);
 
-        // Gestion de la soumission du formulaire
+        // Gestation de la submission du formulate
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -56,7 +57,7 @@ class MovieController extends AbstractController
         }
 
         // Afficher le formulaire
-        return $this->render('movies/add_movie.html.twig', [
+        return $this->render(view: 'movies/add_movie.html.twig', parameters: [
             'form' => $form->createView(),
             'user'=> $user,
         ]);
@@ -80,15 +81,17 @@ class MovieController extends AbstractController
         return new Response($content);
     }
 
+    /**
+     * @throws Exception
+     */
     #[Route('/movie-proposal', name: 'movie_proposal')]
-    public function api_moviePropostion(Request $request, MovieApiService $movieApiService): Response
+    public function api_movieProposition(Request $request, MovieApiService $movieApiService): Response
     {
         $user = $this->getUser();
 
         $apiContent = $this->movieApiService->makeApiRequest('trending/movie/week', [
             'language' => 'fr'
         ]);
-
         return $this->render('movies/movie_proposal.html.twig', [
             // 'form' => $form->createView(),
             'user'=> $user,

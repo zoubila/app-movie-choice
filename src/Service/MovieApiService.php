@@ -2,6 +2,8 @@
 
 namespace App\Service;
 
+use App\Service\Api\MovieApiDataTransformer;
+
 class MovieApiService
 {
     private string $apiUrlBase = 'https://api.themoviedb.org/3/';

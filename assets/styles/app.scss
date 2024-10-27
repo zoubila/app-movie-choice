@@ -81,7 +81,20 @@ z-index: 2;
     height: 32rem;
   }
 
-  .movie-cards-home {
-    background-color: orange;
-    padding-top: 5%;
-  }
+  .img-container {
+    height: 350px; /* Ajustez la hauteur selon vos besoins */
+    overflow: hidden;
+    position: relative;
+}
+
+.img-container img {
+    object-fit: cover;
+    height: 110%; /* Commence avec une taille plus grande que le conteneur */
+    width: 110%;  /* Commence avec une largeur plus grande que le conteneur */
+    transition: transform 0.3s ease; /* Animation de l'effet */
+    transform: scale(1.1); /* Image agrandie au départ */
+}
+
+.img-container:hover img {
+    transform: scale(1); /* Retour à la taille normale sur le hover */
+}
