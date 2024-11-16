@@ -9,8 +9,8 @@
 /vendor/
 /.idea/
 /.vscode/
-/docker/
-/composer.lock
+# /docker/
+# /composer.lock
 ###< symfony/framework-bundle ###
 github
 github.pub
