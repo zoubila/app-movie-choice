@@ -1,18 +1,47 @@
-$primary:#ff8522;
-$secondary:#2ecc71;
-$third:#8e44ad;
-
 @import "~bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Amarante&family=Nothing+You+Could+Do&family=Staatliches&display=swap');
 
 body {
-  // width: 100%;
-  // height: 100%vh;
-  // background-position: center;
-  background: linear-gradient(180deg,
-   rgba(52, 17, 27, 0.00) 62.79%,
-   #1E0B10 99.12%),
-    url('/public/images/background.png') lightgray 50% / cover no-repeat;
+  background-image: url('/public/images/background.png');
+  background-size: cover;
 }
+
+.text-container {
+  position:relative; 
+  text-align: center; /* Centre le texte horizontalement */
+  // height: 100vh; /* Prend toute la hauteur de l'écran */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centre verticalement */
+  align-items: center;
+  color: var(--Colors-Secondary-base, #FFF8DC); /* Couleur du texte */
+}
+
+.amarante {
+  font-family: 'Amarante', cursive;
+  font-size: 15rem; /* Taille du texte */
+  line-height: 1.5; /* Espacement entre les lignes */
+  margin: 0;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 78%; /* 273px */
+  letter-spacing: -32px;
+}
+
+.overlay {
+  position: absolute;
+  font-family: 'Nothing You Could Do', cursive;
+  font-size: 5rem;
+  color: var(--Colors-Tertiary-base, #5B9EC7);
+  top: 50%; /* Positionne le texte superposé */
+  transform: translateY(-50%); /* Ajuste pour centrer */
+  pointer-events: none; /* Empêche l'interaction avec le texte superposé */
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -10px;
+}
+
 
 // header
 .form-control-dark {
