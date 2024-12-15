@@ -2,9 +2,44 @@
 @import url('https://fonts.googleapis.com/css2?family=Amarante&family=Nothing+You+Could+Do&family=Staatliches&display=swap');
 
 body {
-  background-image: url('/public/images/background.png');
-  background-size: cover;
+  // background-image: url('/public/images/background.png');
+  // background-size: cover;
+  // background: linear-gradient(180deg, rgba(52, 17, 27, 0.00) 62.79%, #1E0B10 99.12%), url('/public/images/background.png') lightgray 50% / contain no-repeat;
+  background: 
+    linear-gradient(180deg, rgba(52, 17, 27, 0.00) 20%, #1E0B10 100%), 
+    url('/public/images/background.png') lightgray 50% / cover no-repeat;
+  background-position: center; /* Centre l'image */
+  background-attachment: fixed; /* Optionnel : pour un effet de parallaxe */
 }
+
+nav {
+  display: flex;
+  flex-direction: column; /* Garder les liens en colonne */
+  align-items: center;    /* Centre horizontalement les liens */
+  justify-content: center; /* Centre verticalement les liens dans la navbar */
+  height: 49px;
+  max-width: 1023px;
+  padding: 12px;
+  margin: 0 auto; /* Centre horizontalement le `nav` dans la page */
+}
+
+.home-link {
+  color: var(--Colors-Secondary-base, #FFF8DC);
+  text-align: center;
+  font-family: Staatliches, sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: uppercase;
+  text-decoration: none; /* Supprime le soulignement */
+  margin: 5px 0; /* Ajoute un peu d'espace entre chaque lien */
+}
+
+.home-link:hover {
+  color: var(--Colors-Black-weak, #222);
+}
+
 
 .text-container {
   position:relative; 
@@ -15,6 +50,10 @@ body {
   justify-content: center; /* Centre verticalement */
   align-items: center;
   color: var(--Colors-Secondary-base, #FFF8DC); /* Couleur du texte */
+  pointer-events: none; /* Désactive les interactions sur la zone du conteneur */
+  max-width: fit-content; /* Adapte le conteneur à la largeur du texte */
+  margin: 0 auto; /* Centre horizontalement */
+  user-select: none; /* Désactive la sélection du texte */
 }
 
 .amarante {

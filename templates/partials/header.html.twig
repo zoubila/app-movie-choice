@@ -1,4 +1,4 @@
-<div class="container">
+{# <div class="container">
   <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4">
     <div class="col-md-3 mb-2 mb-md-0">
       <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
@@ -27,4 +27,12 @@
     {% endif %}
 
   </header>
-</div>
+</div> #}
+<header>
+  <nav class="navbar">
+    <a href="{{ path('homepage') }}" class="nav-link home-link">ON SE MATE QUOI?</a>
+    <a href="{{ path('homepage') }}" class="nav-link home-link" disabled>ON S'ECOUTE QUOI?</a>
+    <a href="{{ path('homepage') }}" class="nav-link home-link" >ON SE LIT QUOI?</a>
+    <a href="{{ path('homepage') }}" class="nav-link home-link">MON COMPTE</a>
+  </nav>
+</header>
