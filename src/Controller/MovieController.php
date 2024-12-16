@@ -21,8 +21,21 @@ class MovieController extends AbstractController
         $this->movieApiService = $movieApiService;
     }
     
-    #[Route('/movies', name: 'list_movies')]
+    #[Route('/movies-old', name: 'list_movies')]
     public function listMovies(EntityManagerInterface $entityManager): Response
+    {
+        $movies = $entityManager->getRepository(Movie::class)->findAll();
+        
+        $user = $this->getUser();
+
+        return $this->render('movies/listMovies.html.twig', [
+            'movies'=> $movies,
+            'user' => $user,
+        ]);
+    }
+
+    #[Route('/movie', name: 'movie')]
+    public function movie(EntityManagerInterface $entityManager): Response
     {
         $movies = $entityManager->getRepository(Movie::class)->findAll();
         

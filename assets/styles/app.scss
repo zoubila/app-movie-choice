@@ -114,20 +114,25 @@ nav {
 
 .a-left-risk {
   display: inline-block;
-  padding: 12px 24px;
+  padding: 7px 35px;
   text-align: center;
   border-radius: 51px;
   background: var(--Colors-Black-weak, #222);
-  color: white;
   text-decoration: none; /* Supprime le soulignement */
   font-weight: bold;
   transition: background-color 0.3s ease, color 0.3s ease;
+  color: var(--Colors-White-base, #FFF);
+  font-family: Raleway;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: uppercase;
 }
 
 .a-right-mood {
-  display: inline-block;
-  padding: 12px 24px;
-  text-align: center;
+  // display: inline-block;
+  // text-align: center;
   border-radius: 51px;
   border: 1px solid var(--Colors-Black-weak, #222);
   background: var(--Colors-White-base, #FFF);
@@ -135,16 +140,62 @@ nav {
   text-decoration: none;
   font-weight: bold;
   transition: background-color 0.3s ease, color 0.3s ease;
+  display: inline-flex;
+  padding: 7px 35px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  font-family: Raleway;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: uppercase;
 }
 
 .a-left-risk:hover {
-  background: white;
-  color: var(--Colors-Black-weak, #222);
+  background: var(--Colors-Black-base, #828282);
+  color: var(--Colors-White-base, #FFF);
+  font-family: Raleway;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: uppercase;
 }
 
-.a-right-mood:hover {
-  background: var(--Colors-Black-weak, #222);
-  color: white;
+.a-left-risk:focus {
+  background: var(--Colors-Black-strong, #020202);
+  color: var(--Colors-White-base, #FFF);
+  font-family: Raleway;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.a-right-mood:hover {  
+  background: var(--Colors-Black-weaker, #CFCFCF);
+  color: var(--Colors-Black-weak, #222);
+  font-family: Raleway;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.a-right-mood:focus {
+  background: var(--Colors-White-base, #FFF);
+  font-family: Raleway;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: uppercase;
+  color: var(--Colors-Black-weak, #222);
 }
 
 // header
