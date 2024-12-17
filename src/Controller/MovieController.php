@@ -12,13 +12,16 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use App\Service\MovieApiService;
+use App\Service\Api\MovieApiDataTransformer;
 
 class MovieController extends AbstractController
 {
     private MovieApiService $movieApiService;
-    public function __construct(MovieApiService $movieApiService)
+    private MovieApiDataTransformer $movieDataTransformer;
+    public function __construct(MovieApiService $movieApiService, MovieApiDataTransformer $movieDataTransformer)
     {
         $this->movieApiService = $movieApiService;
+        $this->movieDataTransformer = $movieDataTransformer;
     }
     
     #[Route('/movies-old', name: 'list_movies')]
@@ -35,15 +38,32 @@ class MovieController extends AbstractController
     }
 
     #[Route('/movie', name: 'movie')]
-    public function movie(EntityManagerInterface $entityManager): Response
+    public function movie(Request $request, MovieApiService $movieApiService, MovieApiDataTransformer $movieDataTransformer): Response
     {
-        $movies = $entityManager->getRepository(Movie::class)->findAll();
         
         $user = $this->getUser();
+        $totalPages = 500;
+        $page = rand(1, $totalPages);
 
-        return $this->render('movies/listMovies.html.twig', [
-            'movies'=> $movies,
+        $apiContent = $this->movieApiService->makeApiRequest('discover/movie', [
+            'include_adult' => false,
+            'include_video' => true,
+            'page' => $page,
+            'sort_by' => 'popularity.desc'
+        ]);
+
+        
+        $randomMovie = $apiContent['results'][array_rand($apiContent['results'])]['id'];
+
+        $endpointMovie = $this->movieApiService->makeApiRequest("/movie/$randomMovie", [
+            'language' => 'fr-FR'
+        ]);
+
+        return $this->render('movies/movie_proposal.html.twig', [
+            'nav_color' => 'movie-home-link',
+            'backgroundClass' => 'movie-background',
             'user' => $user,
+            'detail-movie' => $endpointMovie
         ]);
     }
 
@@ -105,8 +125,9 @@ class MovieController extends AbstractController
         $apiContent = $this->movieApiService->makeApiRequest('trending/movie/week', [
             'language' => 'fr'
         ]);
+
         return $this->render('movies/movie_proposal.html.twig', [
-            // 'form' => $form->createView(),
+            'backgroundClass' => 'movie-background',
             'user'=> $user,
             'api_content'=> $apiContent,
         ]);

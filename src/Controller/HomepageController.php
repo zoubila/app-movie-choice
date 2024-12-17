@@ -31,7 +31,6 @@ class HomepageController extends AbstractController
         $transformedContent = $this->movieDataTransformer->transformApiDataHomepage($apiContent);
 
         return $this->render('base.html.twig', [
-            'test' => true,
             'user' => $user,
             'api_content'=> $transformedContent,
         ]);

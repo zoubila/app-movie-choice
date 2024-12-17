@@ -30,9 +30,9 @@
 </div> #}
 <header>
   <nav class="navbar">
-    <a href="{{ path('homepage') }}" class="nav-link home-link {{ app.request.attributes.get('_route') == 'homepage' ? 'active' : '' }}">ON SE MATE QUOI?</a>
-    <a href="#" class="nav-link home-link {{ app.request.attributes.get('_route') == 'listen' ? 'active' : '' }}" disabled>ON S'ECOUTE QUOI?</a>
-    <a href="#" class="nav-link home-link {{ app.request.attributes.get('_route') == 'read' ? 'active' : '' }}" disabled>ON SE LIT QUOI?</a>
-    <a href="{{ path('app_login') }}" class="nav-link home-link {{ app.request.attributes.get('_route') == 'app_login' ? 'active' : '' }}">MON COMPTE</a>
+    <a href="{{ path('homepage') }}" class="nav-link {{ nav_color|default('home-link') }} {{ app.request.attributes.get('_route') == 'homepage' ? 'active' : '' }}">ON SE MATE QUOI?</a>
+    <a href="#" class="nav-link {{ nav_color|default('home-link') }} {{ app.request.attributes.get('_route') == 'listen' ? 'active' : '' }}" disabled>ON S'ECOUTE QUOI?</a>
+    <a href="#" class="nav-link {{ nav_color|default('home-link') }} {{ app.request.attributes.get('_route') == 'read' ? 'active' : '' }}" disabled>ON SE LIT QUOI?</a>
+    <a href="{{ path('app_login') }}" class="nav-link {{ nav_color|default('home-link') }} {{ app.request.attributes.get('_route') == 'app_login' ? 'active' : '' }}">MON COMPTE</a>
   </nav>
 </header>

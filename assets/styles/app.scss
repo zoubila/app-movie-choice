@@ -2,12 +2,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Amarante&family=Nothing+You+Could+Do&family=Staatliches&family=Raleway&display=swap');
 
 body {
-  // background-image: url('/public/images/background.png');
-  // background-size: cover;
-  // background: linear-gradient(180deg, rgba(52, 17, 27, 0.00) 62.79%, #1E0B10 99.12%), url('/public/images/background.png') lightgray 50% / contain no-repeat;
   background: 
-    linear-gradient(180deg, rgba(52, 17, 27, 0.00) 20%, #1E0B10 100%), 
+    linear-gradient(180deg, rgba(52, 17, 27, 0.00) 20%, #1E0B10 100%),
     url('/public/images/background.png') lightgray 50% / cover no-repeat;
+  background-position: center; /* Centre l'image */
+  background-attachment: fixed; /* Optionnel : pour un effet de parallaxe */
+}
+
+body.movie-background {
+  background:
+    url('/public/images/background_no.png') lightgray 50% / cover no-repeat;
   background-position: center; /* Centre l'image */
   background-attachment: fixed; /* Optionnel : pour un effet de parallaxe */
 }
@@ -46,6 +50,22 @@ nav {
   color: var(--Colors-Black-weak, #222);
 }
 
+.movie-home-link {
+  color: var(--Colors-Black-weak, #222);
+  text-align: center;
+  font-family: Staatliches, sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: uppercase;
+  text-decoration: none; /* Supprime le soulignement */
+  margin: 5px 0; /* Ajoute un peu d'espace entre chaque lien */
+}
+
+.movie-home-link:hover {
+  color: var(--Colors-Black-base, #828282);
+}
 
 .text-container {
   position:relative; 
@@ -197,6 +217,22 @@ nav {
   text-transform: uppercase;
   color: var(--Colors-Black-weak, #222);
 }
+
+.div-proposal {
+  display: flex;
+  padding: 48px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  background: url('/public/images/background_no.png') lightgray 50% / cover no-repeat;
+}
+
+
+
+
+
 
 // header
 .form-control-dark {
