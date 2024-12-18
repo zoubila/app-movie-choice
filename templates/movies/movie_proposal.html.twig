@@ -1,7 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Choisis ton film{% endblock %}
+{% block title %}Voila ton film{% endblock %}
 {% block body %}
+{% set hours = (details.runtime // 60) %}
+{% set minutes = (details.runtime % 60) %}
 
+<div class="container movie-layout">
+
+    {# bloc titre  #}
+    <div class="row movie-title-container">
+        <div class="col-7">
+            <div class="row movie-title">{{ details.original_title }}</div>
+            <div class="row movie-subtitle">
+                {{ details.release_date | date('Y') }} ·
+                {{ details.production_countries.0.name }} ·
+                {{ details.genres.0.name }} ·
+                {{ '%2dh%02d'|format(hours, minutes) }}
+            </div>
+        </div>
+        <div class="col-5 movie-account-button">
+            <a href="#" class="a-right-mood">DEJA VU</a>
+            <a href="#" class="a-right-mood">AJOUTER A MA WATCHLIST</a>
+        </div>
+    </div>
+    {# bloc titre #}
+
+    {# bloc content #}
+    <div class="row">
+        <div class="col-4">
+                <img
+                  src="https://image.tmdb.org/t/p/w500{{ details.poster_path }}"
+                  alt="{{ details.original_title }}"
+                  class="w-100 img-fluid"
+                />
+        </div>
+    </div>
+    {# bloc content #}
+
+</div>
     
 {% endblock %}

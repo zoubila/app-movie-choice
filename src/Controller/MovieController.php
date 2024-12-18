@@ -51,15 +51,15 @@ class MovieController extends AbstractController
             'page' => $page,
             'sort_by' => 'popularity.desc'
         ]);
-
         
         $randomMovie = $apiContent['results'][array_rand($apiContent['results'])]['id'];
 
         $endpointMovie = $this->movieApiService->makeApiRequest("/movie/$randomMovie", [
             'language' => 'fr-FR'
         ]);
-
+// dd($endpointMovie);
         return $this->render('movies/movie_proposal.html.twig', [
+            'details' => $endpointMovie,
             'nav_color' => 'movie-home-link',
             'backgroundClass' => 'movie-background',
             'user' => $user,
