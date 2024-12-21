@@ -27,12 +27,23 @@
 
     {# bloc content #}
     <div class="row">
-        <div class="col-4">
+        <div class="col-4 poster-movie">
                 <img
                   src="https://image.tmdb.org/t/p/w500{{ details.poster_path }}"
                   alt="{{ details.original_title }}"
-                  class="w-100 img-fluid"
+                  class="img-movie img-fluid"
                 />
+        </div>
+        <div class="col-8">
+            <div class="row">
+                <div class="progress-circle-container" data-score="{{ (details.vote_average * 10)|round }}">
+                    <svg class="circle-container">
+                        <circle class="background-circle" cx="50%" cy="50%" r="40%" />
+                        <circle class="progress" cx="50%" cy="50%" r="40%" />
+                    </svg>
+                    <div class="score-label">{{ (details.vote_average * 10)|round }}%</div>
+                </div>               
+            </div>
         </div>
     </div>
     {# bloc content #}

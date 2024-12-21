@@ -13,3 +13,23 @@ import './styles/app.scss';
 // Importer le CSS de Bootstrap
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
+document.addEventListener("DOMContentLoaded", () => {
+    const progressContainers = document.querySelectorAll(".progress-circle-container");
+
+    progressContainers.forEach((container) => {
+        const score = parseFloat(container.dataset.score); // Récupère le score
+        const percentage = score; // Convertir directement en pourcentage (0-100)
+
+        const progressCircle = container.querySelector(".progress");
+        const radius = progressCircle.r.baseVal.value; // Rayon du cercle
+        const circumference = 2 * Math.PI * radius; // Calcul exact de la circonférence
+
+        // Mettre à jour les styles SVG
+        progressCircle.style.strokeDasharray = `${circumference}`;
+        const offset = circumference - (circumference * percentage) / 100; // Calcul du remplissage
+        progressCircle.style.strokeDashoffset = offset; // Met à jour le remplissage
+    });
+});
+
+
+
