@@ -54,10 +54,29 @@ class MovieController extends AbstractController
         
         $randomMovie = $apiContent['results'][array_rand($apiContent['results'])]['id'];
 
-        $endpointMovie = $this->movieApiService->makeApiRequest("/movie/$randomMovie", [
+        $endpointMovie['discover'] = $this->movieApiService->makeApiRequest("/movie/$randomMovie", [
             'language' => 'fr-FR'
         ]);
-// dd($endpointMovie);
+        $CreditsMovie['credits'] = $this->movieApiService->makeApiRequest("/movie/$randomMovie/credits", [
+            'language' => 'fr-FR'
+        ]);
+        $alternativeTitles['alternative_titles'] = $this->movieApiService->makeApiRequest("/movie/$randomMovie/alternative_titles", [
+            'language' => 'fr-FR'
+        ]);
+        $imagesMovie['images'] = $this->movieApiService->makeApiRequest("/movie/$randomMovie/images", [
+            'language' => 'fr-FR'
+        ]);
+        $reviewsMovie['reviews'] = $this->movieApiService->makeApiRequest("/movie/$randomMovie/reviews", [
+            'language' => 'fr-FR'
+        ]);
+        $videoMovie['videos'] = $this->movieApiService->makeApiRequest("/movie/$randomMovie/videos", [
+            'language' => 'fr-FR'
+        ]);
+        $watchProviderMovie['providers'] = $this->movieApiService->makeApiRequest("/movie/$randomMovie/watch/providers", [
+            'language' => 'fr-FR'
+        ]);
+        $allinfo = array_merge($endpointMovie, $CreditsMovie, $alternativeTitles, $imagesMovie, $reviewsMovie, $videoMovie, $watchProviderMovie);
+dd($allinfo);
         return $this->render('movies/movie_proposal.html.twig', [
             'details' => $endpointMovie,
             'nav_color' => 'movie-home-link',

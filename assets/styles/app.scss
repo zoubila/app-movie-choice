@@ -291,6 +291,10 @@ nav {
   height: 24em;
 }
 
+.user-movie {
+  padding-top : 2em;
+}
+
 :root {
   --circle-radius: 40; /* Rayon en % du conteneur */
   --circle-circumference: calc(2 * 3.14159 * var(--circle-radius)); /* Calcul exact */
@@ -314,13 +318,13 @@ nav {
 .background-circle {
   fill: none;
   stroke: rgba(13, 95, 25, 0.20); /* Couleur de fond gris/vert */
-  stroke-width: 8;
+  stroke-width: 5;
 }
 
 .progress {
   fill: none;
   stroke: #46D35B; /* Couleur de progression */
-  stroke-width: 8;
+  stroke-width: 5;
   stroke-dasharray: var(--circle-circumference); /* Circonférence */
   stroke-dashoffset: var(--circle-circumference); /* Initialement vide */
   transition: stroke-dashoffset 0.5s ease; /* Animation du remplissage */
@@ -334,7 +338,19 @@ nav {
   text-align: center;
 }
 
+.movie-real {
+   padding-left: 0.5em;
+}
 
+.movie-real-name {
+  color: var(--Colors-Black-base, #828282);
+  font-family: Raleway;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: uppercase;
+}
 
 
 
