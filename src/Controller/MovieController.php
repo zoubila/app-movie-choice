@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use App\Entity\Movie;
 use App\Entity\User;
 use App\Form\MovieType;
+use App\Handler\MovieDetailApiHandler;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,10 +39,13 @@ class MovieController extends AbstractController
     }
 
     #[Route('/movie', name: 'movie')]
-    public function movie(Request $request, MovieApiService $movieApiService, MovieApiDataTransformer $movieDataTransformer): Response
+    public function movie(MovieDetailApiHandler $movieHandler,Request $request, MovieApiService $movieApiService, MovieApiDataTransformer $movieDataTransformer): Response
     {
         
         $user = $this->getUser();
+        $movie = $movieHandler->handle();
+
+
         $totalPages = 500;
         $page = rand(1, $totalPages);
 
@@ -54,7 +58,7 @@ class MovieController extends AbstractController
         
         $randomMovie = $apiContent['results'][array_rand($apiContent['results'])]['id'];
 
-        $endpointMovie['discover'] = $this->movieApiService->makeApiRequest("/movie/$randomMovie", [
+        $endpointMovie = $this->movieApiService->makeApiRequest("/movie/$randomMovie", [
             'language' => 'fr-FR'
         ]);
         $CreditsMovie['credits'] = $this->movieApiService->makeApiRequest("/movie/$randomMovie/credits", [
@@ -76,13 +80,14 @@ class MovieController extends AbstractController
             'language' => 'fr-FR'
         ]);
         $allinfo = array_merge($endpointMovie, $CreditsMovie, $alternativeTitles, $imagesMovie, $reviewsMovie, $videoMovie, $watchProviderMovie);
-dd($allinfo);
+        
+        dd($allinfo);
         return $this->render('movies/movie_proposal.html.twig', [
             'details' => $endpointMovie,
             'nav_color' => 'movie-home-link',
             'backgroundClass' => 'movie-background',
             'user' => $user,
-            'detail-movie' => $endpointMovie
+            'detail-movie' => $allinfo
         ]);
     }
 
