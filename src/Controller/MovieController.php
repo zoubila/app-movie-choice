@@ -43,7 +43,7 @@ class MovieController extends AbstractController
     {
         
         $user = $this->getUser();
-        $movie = $movieHandler->handle();
+        // $movie = $movieHandler->handle();
 
 
         $totalPages = 500;
@@ -81,7 +81,7 @@ class MovieController extends AbstractController
         ]);
         $allinfo = array_merge($endpointMovie, $CreditsMovie, $alternativeTitles, $imagesMovie, $reviewsMovie, $videoMovie, $watchProviderMovie);
         
-        dd($allinfo);
+        // dd($allinfo);
         return $this->render('movies/movie_proposal.html.twig', [
             'details' => $endpointMovie,
             'nav_color' => 'movie-home-link',
