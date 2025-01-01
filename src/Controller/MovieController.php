@@ -43,7 +43,7 @@ class MovieController extends AbstractController
     {
         
         $user = $this->getUser();
-        // $movie = $movieHandler->handle();
+        $movie = $movieHandler->handle();
 
 
         $totalPages = 500;
@@ -57,6 +57,7 @@ class MovieController extends AbstractController
         ]);
         
         $randomMovie = $apiContent['results'][array_rand($apiContent['results'])]['id'];
+        // $randomMovie=   457332;
 
         $endpointMovie = $this->movieApiService->makeApiRequest("/movie/$randomMovie", [
             'language' => 'fr-FR'
@@ -81,7 +82,7 @@ class MovieController extends AbstractController
         ]);
         $allinfo = array_merge($endpointMovie, $CreditsMovie, $alternativeTitles, $imagesMovie, $reviewsMovie, $videoMovie, $watchProviderMovie);
         
-        // dd($allinfo);
+        // dd($movie);   
         return $this->render('movies/movie_proposal.html.twig', [
             'details' => $endpointMovie,
             'nav_color' => 'movie-home-link',

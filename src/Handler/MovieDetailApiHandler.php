@@ -31,7 +31,7 @@ class MovieDetailApiHandler
         ]);
 
         $randomMovieId = $apiContent['results'][array_rand($apiContent['results'])]['id'];
-
+        // $randomMovieId = 457332;
         // Fetch all related data
         $movieDetails = $this->movieApiService->makeApiRequest("/movie/$randomMovieId", [
             'language' => 'fr-FR'
@@ -54,6 +54,7 @@ class MovieDetailApiHandler
         $providers = $this->movieApiService->makeApiRequest("/movie/$randomMovieId/watch/providers", [
             'language' => 'fr-FR'
         ]);
+        
 
 
         
