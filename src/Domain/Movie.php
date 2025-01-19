@@ -2,15 +2,22 @@
 
 namespace App\Domain;
 
+use DateTime;
+
 class Movie
 {
     private int $id;
+    private array $titles;
     private array $genres;
-    private array $productionCountries;
-    private array $moviesDetails;
+    private DateTime $releaseDate;
+    private bool $adult;
+    private array $originCountries;
+    private ?string $posterPath;
+    private int $runtime;
+    private float $voteAverage;
+    private array $directors;
+    private array $actors;
     private ?string $overview;
-    private array $credits;
-    private array $alternativeTitles;
     private array $images;
     private array $reviews;
     private array $videos;
@@ -18,24 +25,34 @@ class Movie
 
     public function __construct(
         int $id,
+        array $titles,
         array $genres,
-        array $productionCountries,
-        array $moviesDetails,
+        DateTime $releaseDate,
+        bool $adult,
+        array $originCountries,
+        ?string $posterPath,
+        int $runtime,
+        float $voteAverage,
+        array $directors,
+        array $actors,
         ?string $overview,
-        ?array $credits,
-        ?array $alternativeTitles,
         ?array $images,
         ?array $reviews,
         ?array $videos,
         ?array $providers
     ) {
         $this->id = $id;
+        $this->titles = $titles;
         $this->genres = $genres;
-        $this->productionCountries = $productionCountries;
-        $this->moviesDetails = $moviesDetails;
+        $this->releaseDate = $releaseDate;
+        $this->adult = $adult;
+        $this->originCountries = $originCountries;
+        $this->posterPath = $posterPath;
+        $this->runtime = $runtime;
+        $this->voteAverage = $voteAverage;
+        $this->directors = $directors;
+        $this->actors = $actors;
         $this->overview = $overview;
-        $this->credits = $credits;
-        $this->alternativeTitles = $alternativeTitles;
         $this->images = $images;
         $this->reviews = $reviews;
         $this->videos = $videos;
@@ -47,29 +64,49 @@ class Movie
     { 
         return $this->id; 
     }
+    public function getTitles(): array 
+    {
+         return $this->titles; 
+    }
     public function getGenres(): array 
     {
          return $this->genres; 
     }
-    public function getProductionCountries(): array 
+    public function getReleaseDate(): DateTime 
     {
-         return $this->productionCountries; 
+         return $this->releaseDate; 
     }
-    public function getMovieDetails(): array 
+    public function getoriginCountries(): array 
     {
-         return $this->moviesDetails; 
+         return $this->originCountries; 
+    }
+    public function getAdult(): bool 
+    {
+         return $this->adult; 
+    }
+    public function getPosterPath(): string 
+    {
+         return $this->posterPath; 
+    }
+    public function getRuntime(): int 
+    {
+         return $this->runtime; 
+    }
+    public function getVoteAverage(): float 
+    {
+         return $this->voteAverage; 
+    }
+    public function getDirectors(): array 
+    {
+         return $this->directors; 
+    }
+    public function getActors(): array 
+    {
+         return $this->actors; 
     }
     public function getOverview(): ?string 
     {
          return $this->overview; 
-    }
-    public function getCredits(): array 
-    {
-         return $this->credits; 
-    }
-    public function getAlternativeTitles(): array 
-    {
-         return $this->alternativeTitles; 
     }
     public function getImages(): array 
     {
@@ -86,50 +123,5 @@ class Movie
     public function getProviders(): array 
     {
          return $this->providers; 
-    }
-    public function setId(int $id): void 
-    {
-         $this->id = $id; 
-    }
-    public function setGenres(array $genres): void 
-    {
-         $this->genres = $genres; 
-    }
-    public function setProductionCountries(array $productionCountries): void 
-    {
-         $this->productionCountries = $productionCountries; 
-    }
-    public function setOverview(?string $overview): void 
-    {
-         $this->overview = $overview; 
-    }
-    public function setCredits(array $credits): void 
-    {
-         $this->credits = $credits; 
-    }
-    public function setAlternativeTitles(array $alternativeTitles): void 
-    {
-         $this->alternativeTitles = $alternativeTitles; 
-    }
-    public function setImages(array $images): void 
-    {
-         $this->images = $images; 
-    }
-    public function setReviews(array $reviews): void 
-    {
-         $this->reviews = $reviews; 
-    }
-    public function setVideos(array $videos): void 
-    {
-         $this->videos = $videos; 
-    }
-    public function setProviders(array $providers): void
-    {
-         $this->providers = $providers; 
-    }
-    public function formatOverview(string $overview): string
-    {
-        $overview = strlen($overview) > 140? substr($overview,0,140).'...' : $overview;
-        return $overview;
     }
 }

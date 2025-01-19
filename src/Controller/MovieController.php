@@ -58,7 +58,7 @@ class MovieController extends AbstractController
         ]);
         
         $randomMovie = $apiContent['results'][array_rand($apiContent['results'])]['id'];
-        $randomMovie=   457332;
+        $randomMovie=   $movie->getId();
 
         $endpointMovie = $this->movieApiService->makeApiRequest("/movie/$randomMovie", [
             'language' => 'fr-FR'

@@ -32,15 +32,11 @@ class MovieDetailApiHandler
         ]);
 
         $randomMovieId = $apiContent['results'][array_rand($apiContent['results'])]['id'];
-        // $randomMovieId = 457332;
         // Fetch all related data
         $movieDetails = $this->movieApiService->makeApiRequest("/movie/$randomMovieId", [
             'language' => $locale
         ]);
         $credits = $this->movieApiService->makeApiRequest("/movie/$randomMovieId/credits", [
-            'language' => $locale
-        ]);
-        $alternativeTitles = $this->movieApiService->makeApiRequest("/movie/$randomMovieId/alternative_titles", [
             'language' => $locale
         ]);
         $images = $this->movieApiService->makeApiRequest("/movie/$randomMovieId/images", [
@@ -56,16 +52,23 @@ class MovieDetailApiHandler
             'language' => $locale
         ]);
         $genre = $this->MovieApiDataTransformer->setGenres($movieDetails['genres']);
+        $actors = $this->MovieApiDataTransformer->transformActors($credits['cast']);
+        $directors = $this->MovieApiDataTransformer->transformDirectors($credits['crew']);
         
         // Build and return Movie object
         return new Movie(
             $movieDetails['id'],
+            array('title' => $movieDetails['title'],'original_title' => $movieDetails['original_title']),
             $genre,
-            $movieDetails['production_countries'],
-            $movieDetails,
+            new \DateTime($movieDetails['release_date']),
+            $movieDetails['adult'],
+            $movieDetails['origin_country'],
+            $movieDetails['poster_path'] ?? $movieDetails['backdrop_path'] ?? null,
+            $movieDetails['runtime'],
+            $movieDetails['vote_average'],
+            $directors ?? [],
+            $actors ?? [],
             $movieDetails['overview'] ?? null,
-            $credits['cast'] ?? [],
-            $alternativeTitles['titles'] ?? [],
             $images['backdrops'] ?? [],
             $reviews['results'] ?? [],
             $videos['results'] ?? [],
