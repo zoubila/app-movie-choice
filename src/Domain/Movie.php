@@ -5,28 +5,34 @@ namespace App\Domain;
 class Movie
 {
     private int $id;
-    private array $title;
+    private array $genres;
+    private array $productionCountries;
+    private array $moviesDetails;
     private ?string $overview;
     private array $credits;
     private array $alternativeTitles;
     private array $images;
     private array $reviews;
     private array $videos;
-    private array $providers;
+    private ?array $providers;
 
     public function __construct(
         int $id,
-        array $title,
+        array $genres,
+        array $productionCountries,
+        array $moviesDetails,
         ?string $overview,
-        array $credits,
-        array $alternativeTitles,
-        array $images,
-        array $reviews,
-        array $videos,
-        array $providers
+        ?array $credits,
+        ?array $alternativeTitles,
+        ?array $images,
+        ?array $reviews,
+        ?array $videos,
+        ?array $providers
     ) {
         $this->id = $id;
-        $this->title = $title;
+        $this->genres = $genres;
+        $this->productionCountries = $productionCountries;
+        $this->moviesDetails = $moviesDetails;
         $this->overview = $overview;
         $this->credits = $credits;
         $this->alternativeTitles = $alternativeTitles;
@@ -41,9 +47,17 @@ class Movie
     { 
         return $this->id; 
     }
-    public function getTitle(): array 
+    public function getGenres(): array 
     {
-         return $this->title; 
+         return $this->genres; 
+    }
+    public function getProductionCountries(): array 
+    {
+         return $this->productionCountries; 
+    }
+    public function getMovieDetails(): array 
+    {
+         return $this->moviesDetails; 
     }
     public function getOverview(): ?string 
     {
@@ -77,9 +91,13 @@ class Movie
     {
          $this->id = $id; 
     }
-    public function setTitle(array $title): void 
+    public function setGenres(array $genres): void 
     {
-         $this->title = $title; 
+         $this->genres = $genres; 
+    }
+    public function setProductionCountries(array $productionCountries): void 
+    {
+         $this->productionCountries = $productionCountries; 
     }
     public function setOverview(?string $overview): void 
     {

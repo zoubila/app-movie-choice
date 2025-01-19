@@ -10,6 +10,7 @@ class MovieDetailApiHandler
 {
     private MovieApiService $movieApiService;
     private MovieApiDataTransformer $MovieApiDataTransformer;
+    public string $locale;
 
     public function __construct(MovieApiService $movieApiService, MovieApiDataTransformer $movieDataTransformer)
     {
@@ -17,7 +18,7 @@ class MovieDetailApiHandler
         $this->MovieApiDataTransformer = $movieDataTransformer;
     }
 
-    public function handle(): Movie
+    public function handle($locale = 'fr-FR'): Movie
     {
         $totalPages = 500;
         $page = rand(1, $totalPages);
@@ -34,33 +35,33 @@ class MovieDetailApiHandler
         // $randomMovieId = 457332;
         // Fetch all related data
         $movieDetails = $this->movieApiService->makeApiRequest("/movie/$randomMovieId", [
-            'language' => 'fr-FR'
+            'language' => $locale
         ]);
         $credits = $this->movieApiService->makeApiRequest("/movie/$randomMovieId/credits", [
-            'language' => 'fr-FR'
+            'language' => $locale
         ]);
         $alternativeTitles = $this->movieApiService->makeApiRequest("/movie/$randomMovieId/alternative_titles", [
-            'language' => 'fr-FR'
+            'language' => $locale
         ]);
         $images = $this->movieApiService->makeApiRequest("/movie/$randomMovieId/images", [
-            'language' => 'fr-FR'
+            'language' => $locale
         ]);
         $reviews = $this->movieApiService->makeApiRequest("/movie/$randomMovieId/reviews", [
-            'language' => 'fr-FR'
+            'language' => $locale
         ]);
         $videos = $this->movieApiService->makeApiRequest("/movie/$randomMovieId/videos", [
-            'language' => 'fr-FR'
+            'language' => $locale
         ]);
         $providers = $this->movieApiService->makeApiRequest("/movie/$randomMovieId/watch/providers", [
-            'language' => 'fr-FR'
+            'language' => $locale
         ]);
-        
-
-
+        $genre = $this->MovieApiDataTransformer->setGenres($movieDetails['genres']);
         
         // Build and return Movie object
         return new Movie(
             $movieDetails['id'],
+            $genre,
+            $movieDetails['production_countries'],
             $movieDetails,
             $movieDetails['overview'] ?? null,
             $credits['cast'] ?? [],

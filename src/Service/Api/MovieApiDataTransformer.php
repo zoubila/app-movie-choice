@@ -21,6 +21,15 @@ class MovieApiDataTransformer
         return $data;
     }
 
+    public function setGenres(array $data): array
+    {
+        $genres = [];
+        foreach ($data as $genre) {
+            $genres[] = $genre['name'];
+        }
+        return $genres;
+    }
+
     public function roundRating(float $rating): float
     {
         return round($rating, 1);
