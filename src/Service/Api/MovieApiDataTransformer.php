@@ -55,6 +55,18 @@ class MovieApiDataTransformer
         return $title;
     }
 
+    public function formatProviders(array $providers, string $locale = 'FR' ): array
+    {
+        if (isset($providers['results']['FR'])) {
+            dd($providers['results']['FR']);
+            return $providers['results']['FR'];
+        } elseif (isset($providers['results']['US'])) {
+            dd($providers['results']['US']);
+            return $providers['results']['US'];
+        }
+        return [];
+    }
+
     /**
      * Transforme un tableau d'API en une collection d'objets Actors
      *
@@ -77,6 +89,10 @@ class MovieApiDataTransformer
                 );
             }
         }
+        if (!isset($actorObj)) {
+            $actorObj = [];
+        }
+
         return $actorObj;
     }
 
@@ -100,6 +116,9 @@ class MovieApiDataTransformer
                     $director['profile_path'] ?? ''
                 );
             }
+        }
+        if (!isset($directorObj)) {
+            $directorObj = [];
         }
 
         return $directorObj;

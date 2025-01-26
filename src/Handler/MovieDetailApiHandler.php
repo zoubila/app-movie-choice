@@ -54,6 +54,7 @@ class MovieDetailApiHandler
         $genre = $this->MovieApiDataTransformer->setGenres($movieDetails['genres']);
         $actors = $this->MovieApiDataTransformer->transformActors($credits['cast']);
         $directors = $this->MovieApiDataTransformer->transformDirectors($credits['crew']);
+        $providers = $this->MovieApiDataTransformer->formatProviders($providers, $locale);
         
         // Build and return Movie object
         return new Movie(
