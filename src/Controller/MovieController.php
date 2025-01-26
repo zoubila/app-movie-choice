@@ -44,7 +44,7 @@ class MovieController extends AbstractController
         
         $user = $this->getUser();
         $movie = $movieHandler->handle();
-        // dd($movie);
+        dd($movie);
 
 
         $totalPages = 500;

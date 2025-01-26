@@ -51,20 +51,22 @@ class MovieApiDataTransformer
     }
     public function formatTitle(string $title): string
     {
-        $title = strlen($title) > 30? substr($title,0,30).'...' : $title;
+        $title = strlen($title) > 30 ? substr($title,0,30).'...' : $title;
         return $title;
     }
 
     public function formatProviders(array $providers, string $locale = 'FR' ): array
     {
+        $provider = [];
+
         if (isset($providers['results']['FR'])) {
-            dd($providers['results']['FR']);
-            return $providers['results']['FR'];
-        } elseif (isset($providers['results']['US'])) {
-            dd($providers['results']['US']);
-            return $providers['results']['US'];
+            $provider['FR'] = $providers['results']['FR'];
         }
-        return [];
+        if(isset($providers['results']['US'])) {
+            $provider['US'] = $providers['results']['US'];
+        }
+
+        return $provider ?? [];
     }
 
     /**

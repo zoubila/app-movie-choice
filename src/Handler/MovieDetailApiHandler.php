@@ -70,10 +70,10 @@ class MovieDetailApiHandler
             $directors ?? [],
             $actors ?? [],
             $movieDetails['overview'] ?? null,
-            $images['backdrops'] ?? [],
+            $images ?? [],
             $reviews['results'] ?? [],
             $videos['results'] ?? [],
-            $providers['results'] ?? []
+            $providers ?? []
         );
     }
 }
