@@ -2,19 +2,21 @@
 
 {% block title %}Voila ton film{% endblock %}
 {% block body %}
-{% set hours = (details.runtime // 60) %}
-{% set minutes = (details.runtime % 60) %}
+{% set hours = (movie.runtime // 60) %}
+{% set minutes = (movie.runtime % 60) %}
 
 <div class="container movie-layout">
 
     {# bloc titre  #}
     <div class="row movie-title-container">
         <div class="col-7">
-            <div class="row movie-title">{{ details.original_title }}</div>
+            <div class="row movie-title">{{ movie.titles.title }}</div>
             <div class="row movie-subtitle">
-                {{ details.release_date | date('Y') }} ·
-                {{ details.production_countries.0.name }} ·
-                {{ details.genres.0.name }} ·
+                {{ movie.releaseDate | date('Y') }} · 
+                {{ movie.originCountries.0 }} · 
+                {% for genre in movie.genres %}
+                    {{ genre }}{% if not loop.last %}/{% endif %}
+                {% endfor %} · 
                 {{ '%2dh%02d'|format(hours, minutes) }}
             </div>
         </div>
@@ -29,24 +31,47 @@
     <div class="row border">
         <div class="col-4 poster-movie border">
                 <img
-                  src="https://image.tmdb.org/t/p/w500{{ details.poster_path }}"
-                  alt="{{ details.original_title }}"
+                  src="https://image.tmdb.org/t/p/w500{{ movie.posterPath }}"
+                  alt="{{ movie.titles.original_title }}"
                   class="img-movie img-fluid"
                 />
         </div>
         <div class="col-8 user-movie border">
             <div class="row border">
-                <div class="progress-circle-container border" data-score="{{ (details.vote_average * 10)|round }}">
+                <div class="progress-circle-container border" data-score="{{ (movie.voteAverage * 10)|round }}">
                     <svg class="circle-container" viewBox="0 0 100 100">
                         <circle class="background-circle" cx="50%" cy="50%" r="40%" />
                         <circle class="progress" cx="50%" cy="50%" r="40%" />
                     </svg>
-                    <div class="score-label">{{ (details.vote_average * 10)|round }}%</div>
+                    <div class="score-label">{{ (movie.voteAverage * 10)|round }}%</div>
                 </div>               
             </div>
             <div class="row movie-real border">
-                <span class="movie-real-name">Réalisateur :</span>
-                <p></p>
+                <span class="movie-real">Réalisateur :</span>
+            </div>
+            <div class="row movie-real-name border">
+                {% for director in movie.directors %}
+                    {{ director.name }}{% if not loop.last %}-{% endif %}
+                {% endfor %}
+            </div>
+            <div class="row movie-real border">
+                <span class="movie-real">Synopsis :</span>
+            </div>
+            <div class="row movie-real-name border">
+                {{ movie.overview }}
+            </div>
+            <div class="row movie-real border">
+                <span class="movie-real">Plateforme :</span>
+            </div>
+            <div class="row movie-real-name border">
+                {% if movie.providers.FR %}
+                    {% if movie.providers.FR %}
+                    {{ movie.providers.FR.link }}
+                {% elseif movie.providers.US %}
+                    {{ movie.providers.US.link }}
+                {% else %}
+                    Pas de plateforme disponible
+                {% endif %}
             </div>
         </div>
     </div>

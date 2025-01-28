@@ -340,16 +340,26 @@ nav {
 
 .movie-real {
    padding-left: 0.5em;
+   color: var(--Colors-Black-base, #828282);
+   font-family: Raleway;
+   font-size: 12px;
+   font-style: normal;
+   font-weight: 400;
+   line-height: normal;
+   text-transform: uppercase;
 }
 
 .movie-real-name {
-  color: var(--Colors-Black-base, #828282);
+  padding-left: 0.7em;
+  padding-top: 0.4em;
+  padding-bottom: 0.4em;
+  color: var(--Colors-Black-weak, #222);
   font-family: Raleway;
-  font-size: 12px;
+  font-size: 16px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 500;
   line-height: normal;
-  text-transform: uppercase;
+  text-transform: inherit;
 }
 
 
