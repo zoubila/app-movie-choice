@@ -99,7 +99,8 @@
                                 {% endfor %}
                             </div>                            
                         {% endif %}
-                {% elseif movie.providers.US is defined%}
+                    </div>
+                {% elseif movie.providers.US is defined %}
                     <div class="row movie-real border">
                         <span class="movie-real">Plateformes : {% if movie.providers.US.Sub is defined and movie.providers.US.Sub is not empty %}<i>abonnement US</i>{% else %}<i>Pas de bol, y'a que de la VOD aux US</i>{% endif %}</span>
                     </div>
@@ -121,17 +122,28 @@
                                 {% endfor %}
                             </div>                            
                         {% endif %}
+                    </div>    
                 {% endif %}
-                    </div>
             {% endif %}
-        </div>
         {# bloc providers #}
 
         {# bloc cast #}
+        {% if movie.actors is defined and movie.actors is not empty %}
+            <div class="row movie-real border">
+                <span class="movie-real">Acteurs :</span>
+            </div>
+            <div class="row movie-real-actors border">
+                {% for actor in movie.actors %}
+                    {{ actor.name }}{% if not loop.last %}-{% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
         {# bloc cast #}
-        
+
+
+
         {# bloc note #}
-    </div>
+    
     {# bloc content #}
 
 </div>
