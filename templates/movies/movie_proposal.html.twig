@@ -29,6 +29,7 @@
 
     {# bloc content #}
     <div class="row border">
+        {# bloc affiche film #}
         <div class="col-4 poster-movie border">
                 <img
                   src="https://image.tmdb.org/t/p/w500{{ movie.posterPath }}"
@@ -36,7 +37,11 @@
                   class="img-movie img-fluid"
                 />
         </div>
-        <div class="col-8 user-movie border">
+        {# bloc affiche film #}
+        
+        {# bloc note #}
+        <div class="col-8 border">
+            {# bloc affiche film #}
             <div class="row border">
                 <div class="progress-circle-container border" data-score="{{ (movie.voteAverage * 10)|round }}">
                     <svg class="circle-container" viewBox="0 0 100 100">
@@ -46,6 +51,9 @@
                     <div class="score-label">{{ (movie.voteAverage * 10)|round }}%</div>
                 </div>               
             </div>
+            {# bloc affiche film #}
+
+            {# bloc real #}
             <div class="row movie-real border">
                 <span class="movie-real">Réalisateur :</span>
             </div>
@@ -54,26 +62,75 @@
                     {{ director.name }}{% if not loop.last %}-{% endif %}
                 {% endfor %}
             </div>
-            <div class="row movie-real border">
-                <span class="movie-real">Synopsis :</span>
-            </div>
-            <div class="row movie-real-name border">
-                {{ movie.overview }}
-            </div>
-            <div class="row movie-real border">
-                <span class="movie-real">Plateforme :</span>
-            </div>
-            <div class="row movie-real-name border">
-                {% if movie.providers.FR %}
-                    {% if movie.providers.FR %}
-                    {{ movie.providers.FR.link }}
-                {% elseif movie.providers.US %}
-                    {{ movie.providers.US.link }}
-                {% else %}
-                    Pas de plateforme disponible
+            {# bloc real #}
+
+            {# bloc synopsis #}
+            {% if movie.overview %}
+                <div class="row movie-real border">
+                    <span class="movie-real">Synopsis :</span>
+                </div>
+                <div class="row movie-real-name border">
+                    {{ movie.overview }}
+                </div>
+            {% endif %}
+            {# bloc synopsis #}
+
+            {# bloc providers #}
+            {% if movie.providers.FR is defined or movie.providers.US is defined %}
+                {% if movie.providers.FR is defined %}
+                    <div class="row movie-real border">
+                        <span class="movie-real">Plateformes : {% if movie.providers.FR.Sub is defined and movie.providers.FR.Sub is not empty %}<i>abonnement français</i>{% else %}<i>Pas de bol, y'a que de la VOD en France</i>{% endif %}</span>
+                    </div>
+                    <div class="row movie-real-providers border">
+                        {% if movie.providers.FR.Sub is defined and movie.providers.FR.Sub is not empty %}
+                            <div class="d-flex gap-2">
+                                {% for provider in movie.providers.FR.Sub %}
+                                    <span class="badge d-flex align-items-center p-1 pe-2 text-dark-emphasis bg-light-subtle border border-dark-subtle rounded-pill">
+                                        <img class="rounded-circle me-1" width="24" height="24" src="https://image.tmdb.org/t/p/w500{{ provider.logo_path }}" alt="">{{ provider.provider_name }}
+                                    </span>
+                                {% endfor %}
+                            </div>
+                        {% elseif movie.providers.FR.Paid is defined and movie.providers.FR.Paid is not empty %}
+                            <div class="d-flex gap-2">
+                                {% for provider in movie.providers.FR.Paid %}
+                                    <span class="badge d-flex align-items-center p-1 pe-2 text-dark-emphasis bg-light-subtle border border-dark-subtle rounded-pill">
+                                        <img class="rounded-circle me-1" width="24" height="24" src="https://image.tmdb.org/t/p/w500{{ provider.logo_path }}" alt="">{{ provider.provider_name }}
+                                    </span>
+                                {% endfor %}
+                            </div>                            
+                        {% endif %}
+                {% elseif movie.providers.US is defined%}
+                    <div class="row movie-real border">
+                        <span class="movie-real">Plateformes : {% if movie.providers.US.Sub is defined and movie.providers.US.Sub is not empty %}<i>abonnement US</i>{% else %}<i>Pas de bol, y'a que de la VOD aux US</i>{% endif %}</span>
+                    </div>
+                    <div class="row movie-real-providers border">
+                        {% if movie.providers.US.Sub is defined and movie.providers.US.Sub is not empty %}
+                            <div class="d-flex gap-2">
+                                {% for provider in movie.providers.US.Sub %}
+                                    <span class="badge d-flex align-items-center p-1 pe-2 text-dark-emphasis bg-light-subtle border border-dark-subtle rounded-pill">
+                                        <img class="rounded-circle me-1" width="24" height="24" src="https://image.tmdb.org/t/p/w500{{ provider.logo_path }}" alt="">{{ provider.provider_name }}
+                                    </span>
+                                {% endfor %}
+                            </div>
+                        {% elseif movie.providers.US.Paid is defined and movie.providers.US.Paid is not empty %}
+                            <div class="d-flex gap-2">
+                                {% for provider in movie.providers.US.Paid %}
+                                    <span class="badge d-flex align-items-center p-1 pe-2 text-dark-emphasis bg-light-subtle border border-dark-subtle rounded-pill">
+                                        <img class="rounded-circle me-1" width="24" height="24" src="https://image.tmdb.org/t/p/w500{{ provider.logo_path }}" alt="">{{ provider.provider_name }}
+                                    </span>
+                                {% endfor %}
+                            </div>                            
+                        {% endif %}
                 {% endif %}
-            </div>
+                    </div>
+            {% endif %}
         </div>
+        {# bloc providers #}
+
+        {# bloc cast #}
+        {# bloc cast #}
+        
+        {# bloc note #}
     </div>
     {# bloc content #}
 

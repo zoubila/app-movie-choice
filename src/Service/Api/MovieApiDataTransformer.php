@@ -55,18 +55,38 @@ class MovieApiDataTransformer
         return $title;
     }
 
-    public function formatProviders(array $providers, string $locale = 'FR' ): array
+    public function formatProviders(array $providers, string $locale = 'FR'): array
     {
-        $provider = [];
+        $formattedProviders = [];
 
-        if (isset($providers['results']['FR'])) {
-            $provider['FR'] = $providers['results']['FR'];
-        }
-        if(isset($providers['results']['US'])) {
-            $provider['US'] = $providers['results']['US'];
+        foreach (['FR', 'US'] as $country) {
+            if (!isset($providers['results'][$country])) {
+                continue; // Si le pays n'existe pas dans les résultats, on passe au suivant
+            }
+
+            $data = $providers['results'][$country];
+
+            // Récupération sécurisée des données pour éviter les erreurs
+            $rent = $data['rent'] ?? [];
+            $buy = $data['buy'] ?? [];
+            $flatrate = $data['flatrate'] ?? [];
+
+            // Fusionner rent et buy en supprimant les doublons sur 'provider_id'
+            $mergedProvidersVOD = array_merge($rent, $buy);
+            $uniqueProviders = [];
+
+            foreach ($mergedProvidersVOD as $provider) {
+                $uniqueProviders[$provider['provider_id']] = $provider;
+            }
+
+            // Construire la structure demandée
+            $formattedProviders[$country] = [
+                'Paid' => array_values($uniqueProviders), // Réindexation
+                'Sub'  => $flatrate, // Abonnements
+            ];
         }
 
-        return $provider ?? [];
+        return $formattedProviders ?? [];
     }
 
     /**

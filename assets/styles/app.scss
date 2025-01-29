@@ -339,10 +339,10 @@ nav {
 }
 
 .movie-real {
-   padding-left: 0.5em;
+   padding-left: 0.4em;
    color: var(--Colors-Black-base, #828282);
    font-family: Raleway;
-   font-size: 12px;
+   font-size: 14px;
    font-style: normal;
    font-weight: 400;
    line-height: normal;
@@ -353,6 +353,17 @@ nav {
   padding-left: 0.7em;
   padding-top: 0.4em;
   padding-bottom: 0.4em;
+  color: var(--Colors-Black-weak, #222);
+  font-family: Raleway;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: inherit;
+}
+
+.movie-real-providers {
+  padding-top: 0.4em;
   color: var(--Colors-Black-weak, #222);
   font-family: Raleway;
   font-size: 16px;
