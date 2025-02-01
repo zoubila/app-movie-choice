@@ -11,12 +11,12 @@
     <div class="row movie-title-container">
         <div class="col-7">
             <div class="row movie-title">{{ movie.titles.title }}</div>
-            <div class="row movie-subtitle">
-                {{ movie.releaseDate | date('Y') }} · 
-                {{ movie.originCountries.0 }} · 
+            <div class="row movie-subtitle border">
+                {{ movie.releaseDate | date('Y') }} &nbsp;·&nbsp;
+                {{ movie.originCountries.0 }} &nbsp;·&nbsp; 
                 {% for genre in movie.genres %}
                     {{ genre }}{% if not loop.last %}/{% endif %}
-                {% endfor %} · 
+                {% endfor %} &nbsp;·&nbsp; 
                 {{ '%2dh%02d'|format(hours, minutes) }}
             </div>
         </div>
@@ -132,10 +132,12 @@
             <div class="row movie-real border">
                 <span class="movie-real">Acteurs :</span>
             </div>
-            <div class="row movie-real-actors border">
-                {% for actor in movie.actors %}
-                    {{ actor.name }}{% if not loop.last %}-{% endif %}
-                {% endfor %}
+            <div class="row actors-container border">
+                <div class="d-flex gap-2">
+                    {% for actor in movie.actors %}
+                        <input type="button" value="{{ actor.name }}" class="btn movie-real-actors"disabled>
+                    {% endfor %}
+                </div>
             </div>
         {% endif %}
         {# bloc cast #}

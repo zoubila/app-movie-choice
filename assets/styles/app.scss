@@ -364,6 +364,7 @@ nav {
 
 .movie-real-providers {
   padding-top: 0.4em;
+  padding-bottom: 0.6em;
   color: var(--Colors-Black-weak, #222);
   font-family: Raleway;
   font-size: 16px;
@@ -371,17 +372,28 @@ nav {
   font-weight: 500;
   line-height: normal;
   text-transform: inherit;
+  max-width: 100%; /* Empêche le conteneur d’être plus large que son parent */
 }
 
-.movie-real-actors {
+.actors-container {
+  display: flex;
+  flex-wrap: wrap; /* Permet aux éléments de passer à la ligne */
+  gap: 12px; /* Espacement entre les boutons */
+  align-items: center;
+  justify-content: flex-start; /* Pour éviter un alignement étrange */
   padding-top: 0.4em;
-  color: var(--Colors-Black-weak, #222);
-  font-family: Raleway;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  text-transform: inherit;
+  max-width: 100%; /* Empêche le conteneur d’être plus large que son parent */
+  white-space: pre-wrap; /* Permet le retour à la ligne */
+}
+
+.movie-real-actors:disabled {
+  display: inline-flex;
+  padding: 8px 12px;
+  align-items: flex-start;
+  gap: 12px;
+  border-radius: 4px;
+  border: 1px solid var(--Colors-Black-base, #828282);
+  background: var(--Colors-White-base, #FFF);
 }
 
 
