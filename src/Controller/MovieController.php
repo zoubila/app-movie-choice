@@ -45,7 +45,7 @@ class MovieController extends AbstractController
         $user = $this->getUser();
         $movie = $movieHandler->handle();
 
-        dd($movie);
+//        dd($movie->getImages());
       
         return $this->render('movies/movie_proposal.html.twig', [
             'nav_color' => 'movie-home-link',

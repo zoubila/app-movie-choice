@@ -39,9 +39,7 @@ class MovieDetailApiHandler
         $credits = $this->movieApiService->makeApiRequest("/movie/$randomMovieId/credits", [
             'language' => $locale
         ]);
-        $images = $this->movieApiService->makeApiRequest("/movie/$randomMovieId/images", [
-            'language' => $locale
-        ]);
+        $images = $this->movieApiService->makeApiRequest("/movie/$randomMovieId/images");
         $reviews = $this->movieApiService->makeApiRequest("/movie/$randomMovieId/reviews", [
             'language' => $locale
         ]);
