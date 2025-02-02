@@ -91,7 +91,7 @@
                                 {% endfor %}
                             </div>
                         {% elseif movie.providers.FR.Paid is defined and movie.providers.FR.Paid is not empty %}
-                            <div class="d-flex gap-2">
+                            <div class="d-flex flex-wrap gap-2">
                                 {% for provider in movie.providers.FR.Paid %}
                                     <span class="badge d-flex align-items-center p-1 pe-2 text-dark-emphasis bg-light-subtle border border-dark-subtle rounded-pill">
                                         <img class="rounded-circle me-1" width="24" height="24" src="https://image.tmdb.org/t/p/w500{{ provider.logo_path }}" alt="">{{ provider.provider_name }}
@@ -125,29 +125,37 @@
                     </div>    
                 {% endif %}
             {% endif %}
-        {# bloc providers #}
+            {# bloc providers #}
 
-        {# bloc cast #}
-        {% if movie.actors is defined and movie.actors is not empty %}
-            <div class="row movie-real border">
-                <span class="movie-real">Acteurs :</span>
-            </div>
-            <div class="row actors-container border">
-                <div class="d-flex gap-2">
-                    {% for actor in movie.actors %}
-                        <input type="button" value="{{ actor.name }}" class="btn movie-real-actors"disabled>
-                    {% endfor %}
+            {# bloc cast #}
+            {% if movie.actors is defined and movie.actors is not empty %}
+                <div class="row movie-real border">
+                    <span class="movie-real">Acteurs :</span>
                 </div>
-            </div>
-        {% endif %}
-        {# bloc cast #}
-
-
-
+                <div class="row actors-container border">
+                    <div class="d-flex flex-wrap gap-2">
+                        {% for actor in movie.actors %}
+                            <input type="button" value="{{ actor.name }}" class="btn movie-real-actors"disabled>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+            {# bloc cast #}
+        </div>
         {# bloc note #}
-    
+    {# bloc content #}
+    </div>
     {# bloc content #}
 
+    {# bloc button #}
+    <div class="row button-bot-container justify-center border">
+        <div class="col-5 movie-account-button d-flex justify-content-between">
+            <a href="{{ path('movie') }}" class="a-left-risk flex-grow-1 text-center text-nowrap">TROUVE MOI UN NOUVEAU FILM</a>
+            <a href="#" class="a-right-mood flex-grow-1 text-center text-nowrap">J'AI CHANGé DE MOOD</a>
+        </div>
+    </div>
+    {# bloc button #}
+
 </div>
-    
+
 {% endblock %}

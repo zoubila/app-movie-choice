@@ -15,45 +15,4 @@
   <a href="#" class="a-right-mood">J'AI UN MOOD</a>
 </div>
 
-{# <section class="py-5 text-center container">
-  <div class="row py-lg-5">
-    <div class="col-lg-6 col-md-8 mx-auto">
-      <h1 class="fw-light">Propose un film!</h1>
-      <p class="lead text-body-secondary">Viens, je te vais te proposer un film que tu ne connais pas en fonction de tes gouts et je vais même te dire ou tu peux le regarder si tu as de la chance</p>
-      <p>
-        <a href="{{ path('movie_proposal') }}" class="btn btn-primary my-2">Propose un film</a>
-        <a href="{{ path('movie_proposal') }}" class="btn btn-secondary my-2">ou un autre !</a>
-      </p>
-    </div>
-  </div>
-</section>
-
-<div class="album py-5 bg-body-tertiary">
-  <div class="container">
-
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-    {% for movie in api_content.results %}
-      <div class="col">
-        <div class="card shadow-sm">
-          <div class="card-img-top img-container">
-            <img
-              src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}"
-              alt="{{ movie.title }}"
-              class="w-100 img-fluid"
-            />
-          </div>
-          <div class="card-body">
-            <p class="card-text">{{ movie.overview }}</p>
-            <div class="d-flex justify-content-between align-items-center">
-                <button type="button" class="btn btn-sm btn-outline-secondary">{{ movie.title }}</button>
-              <small class="text-body-secondary">{{ movie.vote_average }}/10 ({{ movie.vote_count }} votes)</small>
-            </div>
-          </div>
-        </div>
-      </div>
-      {% endfor %}
-    </div>
-  </div>
-</div> #}
-
   
