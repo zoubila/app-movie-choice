@@ -1,8 +1,10 @@
+
+@use "partials/loader.scss";
 @import "~bootstrap/scss/bootstrap";
 @import url('https://fonts.googleapis.com/css2?family=Amarante&family=Nothing+You+Could+Do&family=Staatliches&family=Raleway&display=swap');
 
 body {
-  background: 
+  background:
     linear-gradient(180deg, rgba(52, 17, 27, 0.00) 20%, #1E0B10 100%),
     url('/public/images/background.png') lightgray 50% / cover no-repeat;
   background-position: center; /* Centre l'image */
@@ -73,7 +75,7 @@ nav {
 }
 
 .text-container {
-  position:relative; 
+  position:relative;
   text-align: center; /* Centre le texte horizontalement */
   // height: 100vh; /* Prend toute la hauteur de l'écran */
   display: flex;
@@ -199,7 +201,7 @@ nav {
   text-transform: uppercase;
 }
 
-.a-right-mood:hover {  
+.a-right-mood:hover {
   background: var(--Colors-Black-weaker, #CFCFCF);
   color: var(--Colors-Black-weak, #222);
   font-family: Raleway, serif;
@@ -479,7 +481,7 @@ outline: 0;
     max-width: 330px;
     padding: 1rem;
   }
-  
+
 .form-signin .form-floating:focus-within {
 z-index: 2;
 }
