@@ -39,19 +39,23 @@ class MovieController extends AbstractController
     }
 
     #[Route('/movie', name: 'movie')]
-    public function movie(MovieDetailApiHandler $movieHandler,Request $request, MovieApiService $movieApiService, MovieApiDataTransformer $movieDataTransformer): Response
-    {
+    public function movie(
+        MovieDetailApiHandler $movieHandler,
+        Request $request,
+        MovieApiService $movieApiService,
+        MovieApiDataTransformer $movieDataTransformer
+    ): Response {
         
         $user = $this->getUser();
         $movie = $movieHandler->handle();
 
-//        dd($movie->getImages());
-      
+
         return $this->render('movies/movie_proposal.html.twig', [
             'nav_color' => 'movie-home-link',
             'backgroundClass' => 'movie-background',
             'user' => $user,
-            'movie' => $movie
+            'movie' => $movie,
+            'tabclass' => 'active-movie',
         ]);
     }
 
@@ -62,22 +66,17 @@ class MovieController extends AbstractController
 
         $movie = new Movie();
 
-        // Création du formulaire
         $form = $this->createForm(MovieType::class, $movie);
 
-        // Gestation de la submission du formulate
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Sauvegarde en base de données
             $entityManager->persist($movie);
             $entityManager->flush();
 
-            // Redirection ou message de succès
             return $this->redirectToRoute('list_movies');
         }
 
-        // Afficher le formulaire
         return $this->render(view: 'movies/add_movie.html.twig', parameters: [
             'form' => $form->createView(),
             'user'=> $user,

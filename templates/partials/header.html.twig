@@ -1,36 +1,12 @@
-{# <div class="container">
-  <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4">
-    <div class="col-md-3 mb-2 mb-md-0">
-      <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
-        <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
-      </a>
-    </div>
-
-    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-      <li><a href="{{ path('homepage') }}" class="nav-link px-2 link-primary">Maison</a></li>
-      <li><a href="{{ path('list_movies') }}" class="nav-link px-2">Liste films</a></li>
-      <li><a href="{{ path('add_movie') }}" class="nav-link px-2">Ajouter un film</a></li>
-      <li><a href="{{ path('movie_proposal') }}" class="nav-link px-2">Propose un film</a></li>
-      <li><a href="#" class="nav-link px-2">FAQs</a></li>
-    </ul>
-
-    {% if user %}
-      <div class="col-md-3 text-end">
-        <a href="#"><button type="button" class="btn btn-outline-primary me-2">Profil</button></a>
-        <a href="{{ path('app_logout') }}"><button type="button" class="btn btn-primary">Déconnexion</button></a>
-      </div>
-    {% else %}
-      <div class="col-md-3 text-end">
-        <a href="{{ path('app_login') }}"><button type="button" class="btn btn-outline-primary me-2">Connexion</button></a>
-        <a href="{{ path('app_register') }}"><button type="button" class="btn btn-primary">Créer un compte</button></a>
-      </div>
-    {% endif %}
-
-  </header>
-</div> #}
 <header>
   <nav class="navbar">
-    <a href="{{ path('homepage') }}" class="nav-link {{ nav_color|default('home-link') }} {{ app.request.attributes.get('_route') == 'homepage' ? 'active' : '' }}">ON SE MATE QUOI?</a>
+    <a href="{{ path('homepage') }}"
+       class="nav-link {{ nav_color|default('home-link') }}
+        {% if(tabclass) and tabclass == 'active-movie' %}
+          active-movie
+        {% else %}
+          {{ app.request.attributes.get('_route') == 'homepage' ? 'active' : '' }}
+        {% endif %}">ON SE MATE QUOI?</a>
     <a href="#" class="nav-link {{ nav_color|default('home-link') }} {{ app.request.attributes.get('_route') == 'listen' ? 'active' : '' }}" disabled>ON S'ECOUTE QUOI?</a>
     <a href="#" class="nav-link {{ nav_color|default('home-link') }} {{ app.request.attributes.get('_route') == 'read' ? 'active' : '' }}" disabled>ON SE LIT QUOI?</a>
     <a href="{{ path('app_login') }}" class="nav-link {{ nav_color|default('home-link') }} {{ app.request.attributes.get('_route') == 'app_login' ? 'active' : '' }}">MON COMPTE</a>

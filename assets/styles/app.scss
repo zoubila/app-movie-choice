@@ -46,6 +46,11 @@ nav {
   font-weight: bold; /* Vous pouvez ajouter un effet visuel distinct */
 }
 
+.home-link.active-movie {
+  color: #828282!important;
+  font-weight: bold; /* Vous pouvez ajouter un effet visuel distinct */
+}
+
 .home-link:hover {
   color: var(--Colors-Black-weak, #222);
 }
@@ -186,7 +191,7 @@ nav {
 .a-left-risk:focus {
   background: var(--Colors-Black-strong, #020202);
   color: var(--Colors-White-base, #FFF);
-  font-family: Raleway;
+  font-family: Raleway, serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -197,7 +202,7 @@ nav {
 .a-right-mood:hover {  
   background: var(--Colors-Black-weaker, #CFCFCF);
   color: var(--Colors-Black-weak, #222);
-  font-family: Raleway;
+  font-family: Raleway, serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -207,7 +212,7 @@ nav {
 
 .a-right-mood:focus {
   background: var(--Colors-White-base, #FFF);
-  font-family: Raleway;
+  font-family: Raleway, serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;

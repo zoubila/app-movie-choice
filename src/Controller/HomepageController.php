@@ -33,6 +33,7 @@ class HomepageController extends AbstractController
         return $this->render('base.html.twig', [
             'user' => $user,
             'api_content'=> $transformedContent,
+            'tabclass' => 'active-movie',
         ]);
     }
 }
