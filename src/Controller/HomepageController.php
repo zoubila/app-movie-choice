@@ -24,15 +24,15 @@ class HomepageController extends AbstractController
     {
         $user = $this->getUser();
 
-        $apiContent = $this->movieApiService->makeApiRequest('trending/movie/week', [
-            'language' => 'fr'
-        ]);
+//        $apiContent = $this->movieApiService->makeApiRequest('trending/movie/week', [
+//            'language' => 'fr'
+//        ]);
 
-        $transformedContent = $this->movieDataTransformer->transformApiDataHomepage($apiContent);
+//        $transformedContent = $this->movieDataTransformer->transformApiDataHomepage($apiContent);
 
         return $this->render('base.html.twig', [
             'user' => $user,
-            'api_content'=> $transformedContent,
+//            'api_content'=> $transformedContent,
             'tabclass' => '',
         ]);
     }

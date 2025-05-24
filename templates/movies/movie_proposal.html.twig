@@ -9,28 +9,31 @@
 
     {# bloc titre  #}
     <div class="row movie-title-container">
-        <div class="col-7">
+        <div class="col-8">
             <div class="row movie-title">{{ movie.titles.title }}</div>
-            <div class="row movie-subtitle border">
-                {{ movie.releaseDate | date('Y') }} &nbsp;·&nbsp;
-                {{ movie.originCountries.0 }} &nbsp;·&nbsp; 
-                {% for genre in movie.genres %}
-                    {{ genre }}{% if not loop.last %}/{% endif %}
-                {% endfor %} &nbsp;·&nbsp; 
-                {{ '%2dh%02d'|format(hours, minutes) }}
-            </div>
         </div>
-        <div class="col-5 movie-account-button">
+        <div class="col-4 movie-account-button">
             <a href="#" class="a-right-mood">DEJA VU</a>
             <a href="#" class="a-right-mood">AJOUTER A MA WATCHLIST</a>
         </div>
     </div>
     {# bloc titre #}
 
+    {# bloc subtitle #}
+        <div class="row movie-subtitle border">
+            {{ movie.releaseDate | date('Y') }} &nbsp;·&nbsp;
+            {{ movie.originCountries.0 }} &nbsp;·&nbsp;
+            {% for genre in movie.genres %}
+                {{ genre }}{% if not loop.last %}/{% endif %}
+            {% endfor %} &nbsp;·&nbsp;
+            {{ '%2dh%02d'|format(hours, minutes) }}
+        </div>
+    {# bloc subtitle #}
+
     {# bloc content #}
     <div class="row border">
         {# bloc affiche film #}
-        <div class="col-4 poster-movie border">
+        <div class="col-3 poster-movie border">
                 <img
                   src="https://image.tmdb.org/t/p/w500{{ movie.posterPath }}"
                   alt="{{ movie.titles.original_title }}"
@@ -40,29 +43,32 @@
         {# bloc affiche film #}
         
         {# bloc note #}
-        <div class="col-8 border">
-            {# bloc affiche film #}
+        <div class="col-6 border">
+            {# bloc circle_note and real #}
             <div class="row border">
-                <div class="progress-circle-container border" data-score="{{ (movie.voteAverage * 10)|round }}">
-                    <svg class="circle-container" viewBox="0 0 100 100">
-                        <circle class="background-circle" cx="50%" cy="50%" r="40%" />
-                        <circle class="progress" cx="50%" cy="50%" r="40%" />
-                    </svg>
-                    <div class="score-label">{{ (movie.voteAverage * 10)|round }}%</div>
-                </div>               
+                {# bloc circle_note #}
+                    <div class="col-3 progress-circle-container border" data-score="{{ (movie.voteAverage * 10)|round }}">
+                        <svg class="circle-container" viewBox="0 0 100 100">
+                            <circle class="background-circle" cx="50%" cy="50%" r="40%" />
+                            <circle class="progress" cx="50%" cy="50%" r="40%" />
+                        </svg>
+                        <div class="score-label">{{ (movie.voteAverage * 10)|round }}%</div>
+                    </div>
+                {# bloc circle_note #}
+                {# bloc real #}
+                    <div class="col-9">
+                        <div class="movie-real border">
+                            <span class="movie-real">Réalisateur :</span>
+                        </div>
+                        <div class="movie-real-name border">
+                            {% for director in movie.directors %}
+                                {{ director.name }}{% if not loop.last %}-{% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                {# bloc real #}
             </div>
-            {# bloc affiche film #}
-
-            {# bloc real #}
-            <div class="row movie-real border">
-                <span class="movie-real">Réalisateur :</span>
-            </div>
-            <div class="row movie-real-name border">
-                {% for director in movie.directors %}
-                    {{ director.name }}{% if not loop.last %}-{% endif %}
-                {% endfor %}
-            </div>
-            {# bloc real #}
+            {# bloc circle_note and real #}
 
             {# bloc synopsis #}
             {% if movie.overview %}
@@ -143,7 +149,46 @@
             {# bloc cast #}
         </div>
         {# bloc note #}
-    {# bloc content #}
+
+        {# bloc videos #}
+        <div class="col-3 movie-videos border">
+            <div class="movie-videos border">
+                <div class="col-12">
+                    <h3 class="movie-real">Bande annonce :</h3>
+                    {% if movie.videos is defined and movie.videos is not empty %}
+                        <div id="main-video-player" class="video-container mb-2">
+                            <iframe
+                                    width="100%"
+                                    height="180"
+                                    src="https://www.youtube.com/embed/{{ movie.videos.0.key }}"
+                                    title="{{ movie.videos.0.name }}"
+                                    frameborder="0"
+                                    allowfullscreen
+                                    id="yt-main-iframe"
+                            ></iframe>
+                        </div>
+                        {% if movie.videos|length > 1 %}
+                            <div class="row g-2" id="video-thumbnails">
+                                {% for video in movie.videos %}
+                                    <div class="col-6 col-md-4 col-lg-4">
+                                        <img
+                                            src="https://img.youtube.com/vi/{{ video.key }}/mqdefault.jpg"
+                                            alt="{{ video.name }}"
+                                            class="video-thumb img-fluid border"
+                                            style="cursor: pointer; display: block; width: 100%; height: auto;"
+                                            data-key="{{ video.key }}"
+                                            data-title="{{ video.name }}"
+                                        />
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    {% else %}
+                        <p>Aucune bande annonce disponible.</p>
+                    {% endif %}
+                </div>
+            </div>
+        {# bloc videos #}
     </div>
     {# bloc content #}
 

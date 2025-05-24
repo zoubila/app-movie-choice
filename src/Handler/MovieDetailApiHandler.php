@@ -23,15 +23,18 @@ class MovieDetailApiHandler
         $totalPages = 500;
         $page = rand(1, $totalPages);
 
-        // Fetch random movie ID
-        $apiContent = $this->movieApiService->makeApiRequest('discover/movie', [
+        $filtersGeneralApiCall = [
             'include_adult' => false,
             'include_video' => true,
             'page' => $page,
             'sort_by' => 'popularity.desc',
-        ]);
+        ];
+
+        // Fetch random movie ID
+        $apiContent = $this->movieApiService->makeApiRequest('discover/movie', $filtersGeneralApiCall);
 
         $randomMovieId = $apiContent['results'][array_rand($apiContent['results'])]['id'];
+        $randomMovieId = 427641;
         // Fetch all related data
         $movieDetails = $this->movieApiService->makeApiRequest("/movie/$randomMovieId", [
             'language' => $locale

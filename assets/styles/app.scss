@@ -236,7 +236,7 @@ nav {
 
 .movie-layout {
   display: flex;
-  // padding: 48px;
+  max-width: 1550px;
   flex-direction: column;
   justify-content: center;
   gap: 10px;
@@ -514,4 +514,29 @@ z-index: 2;
 
 .img-container:hover img {
     transform: scale(1); /* Retour à la taille normale sur le hover */
+}
+
+// video section
+
+.video-thumb {
+  transition: border 0.2s;
+}
+.video-thumb:hover {
+  border: 2px solid #007bff;
+}
+#video-thumbnails {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: center;
+}
+#main-video-player iframe {
+  width: 100%;
+  min-height: 180px;
+  aspect-ratio: 16/9;
+}
+@media (max-width: 1200px) {
+  #main-video-player iframe {
+    min-height: 120px;
+  }
 }

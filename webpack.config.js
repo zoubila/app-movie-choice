@@ -22,6 +22,7 @@ Encore
      */
     .addEntry('app', './assets/app.js')
     .addEntry('loader', './assets/js/loader.js')
+    .addEntry('video_player', './assets/js/video_player.js')
     Encore.enableSassLoader()
     .copyFiles({
         from: './assets/images',
