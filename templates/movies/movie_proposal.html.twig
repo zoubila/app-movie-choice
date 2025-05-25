@@ -43,9 +43,9 @@
         {# bloc affiche film #}
         
         {# bloc note #}
-        <div class="col-6 border">
+        <div class="col-6 border movie-note-container">
             {# bloc circle_note and real #}
-            <div class="row border">
+            <div class="row border mb-2">
                 {# bloc circle_note #}
                     <div class="col-3 progress-circle-container border" data-score="{{ (movie.voteAverage * 10)|round }}">
                         <svg class="circle-container" viewBox="0 0 100 100">
@@ -72,77 +72,83 @@
 
             {# bloc synopsis #}
             {% if movie.overview %}
-                <div class="row movie-real border">
-                    <span class="movie-real">Synopsis :</span>
-                </div>
-                <div class="row movie-real-name border">
-                    {{ movie.overview }}
+                <div class="mb-3">
+                    <div class="row movie-real border">
+                        <span class="movie-real">Synopsis :</span>
+                    </div>
+                    <div class="row movie-real-name border">
+                        {{ movie.overview }}
+                    </div>
                 </div>
             {% endif %}
             {# bloc synopsis #}
 
             {# bloc providers #}
             {% if movie.providers.FR is defined or movie.providers.US is defined %}
-                {% if movie.providers.FR is defined %}
-                    <div class="row movie-real border">
-                        <span class="movie-real">Plateformes : {% if movie.providers.FR.Sub is defined and movie.providers.FR.Sub is not empty %}<i>abonnement français</i>{% else %}<i>Pas de bol, y'a que de la VOD en France</i>{% endif %}</span>
-                    </div>
-                    <div class="row movie-real-providers border">
-                        {% if movie.providers.FR.Sub is defined and movie.providers.FR.Sub is not empty %}
-                            <div class="d-flex gap-2">
-                                {% for provider in movie.providers.FR.Sub %}
-                                    <span class="badge d-flex align-items-center p-1 pe-2 text-dark-emphasis bg-light-subtle border border-dark-subtle rounded-pill">
-                                        <img class="rounded-circle me-1" width="24" height="24" src="https://image.tmdb.org/t/p/w500{{ provider.logo_path }}" alt="">{{ provider.provider_name }}
-                                    </span>
-                                {% endfor %}
-                            </div>
-                        {% elseif movie.providers.FR.Paid is defined and movie.providers.FR.Paid is not empty %}
-                            <div class="d-flex flex-wrap gap-2">
-                                {% for provider in movie.providers.FR.Paid %}
-                                    <span class="badge d-flex align-items-center p-1 pe-2 text-dark-emphasis bg-light-subtle border border-dark-subtle rounded-pill">
-                                        <img class="rounded-circle me-1" width="24" height="24" src="https://image.tmdb.org/t/p/w500{{ provider.logo_path }}" alt="">{{ provider.provider_name }}
-                                    </span>
-                                {% endfor %}
-                            </div>                            
-                        {% endif %}
-                    </div>
-                {% elseif movie.providers.US is defined %}
-                    <div class="row movie-real border">
-                        <span class="movie-real">Plateformes : {% if movie.providers.US.Sub is defined and movie.providers.US.Sub is not empty %}<i>abonnement US</i>{% else %}<i>Pas de bol, y'a que de la VOD aux US</i>{% endif %}</span>
-                    </div>
-                    <div class="row movie-real-providers border">
-                        {% if movie.providers.US.Sub is defined and movie.providers.US.Sub is not empty %}
-                            <div class="d-flex gap-2">
-                                {% for provider in movie.providers.US.Sub %}
-                                    <span class="badge d-flex align-items-center p-1 pe-2 text-dark-emphasis bg-light-subtle border border-dark-subtle rounded-pill">
-                                        <img class="rounded-circle me-1" width="24" height="24" src="https://image.tmdb.org/t/p/w500{{ provider.logo_path }}" alt="">{{ provider.provider_name }}
-                                    </span>
-                                {% endfor %}
-                            </div>
-                        {% elseif movie.providers.US.Paid is defined and movie.providers.US.Paid is not empty %}
-                            <div class="d-flex gap-2">
-                                {% for provider in movie.providers.US.Paid %}
-                                    <span class="badge d-flex align-items-center p-1 pe-2 text-dark-emphasis bg-light-subtle border border-dark-subtle rounded-pill">
-                                        <img class="rounded-circle me-1" width="24" height="24" src="https://image.tmdb.org/t/p/w500{{ provider.logo_path }}" alt="">{{ provider.provider_name }}
-                                    </span>
-                                {% endfor %}
-                            </div>                            
-                        {% endif %}
-                    </div>    
-                {% endif %}
+                <div class="mb-3">
+                    {% if movie.providers.FR is defined %}
+                        <div class="row movie-real border">
+                            <span class="movie-real">Plateformes : {% if movie.providers.FR.Sub is defined and movie.providers.FR.Sub is not empty %}<i>abonnement français</i>{% else %}<i>Pas de bol, y'a que de la VOD en France</i>{% endif %}</span>
+                        </div>
+                        <div class="row movie-real-providers border">
+                            {% if movie.providers.FR.Sub is defined and movie.providers.FR.Sub is not empty %}
+                                <div class="d-flex gap-2">
+                                    {% for provider in movie.providers.FR.Sub %}
+                                        <span class="badge d-flex align-items-center p-1 pe-2 text-dark-emphasis bg-light-subtle border border-dark-subtle rounded-pill">
+                                            <img class="rounded-circle me-1" width="24" height="24" src="https://image.tmdb.org/t/p/w500{{ provider.logo_path }}" alt="">{{ provider.provider_name }}
+                                        </span>
+                                    {% endfor %}
+                                </div>
+                            {% elseif movie.providers.FR.Paid is defined and movie.providers.FR.Paid is not empty %}
+                                <div class="d-flex flex-wrap gap-2">
+                                    {% for provider in movie.providers.FR.Paid %}
+                                        <span class="badge d-flex align-items-center p-1 pe-2 text-dark-emphasis bg-light-subtle border border-dark-subtle rounded-pill">
+                                            <img class="rounded-circle me-1" width="24" height="24" src="https://image.tmdb.org/t/p/w500{{ provider.logo_path }}" alt="">{{ provider.provider_name }}
+                                        </span>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% elseif movie.providers.US is defined %}
+                        <div class="row movie-real border">
+                            <span class="movie-real">Plateformes : {% if movie.providers.US.Sub is defined and movie.providers.US.Sub is not empty %}<i>abonnement US</i>{% else %}<i>Pas de bol, y'a que de la VOD aux US</i>{% endif %}</span>
+                        </div>
+                        <div class="row movie-real-providers border">
+                            {% if movie.providers.US.Sub is defined and movie.providers.US.Sub is not empty %}
+                                <div class="d-flex gap-2">
+                                    {% for provider in movie.providers.US.Sub %}
+                                        <span class="badge d-flex align-items-center p-1 pe-2 text-dark-emphasis bg-light-subtle border border-dark-subtle rounded-pill">
+                                            <img class="rounded-circle me-1" width="24" height="24" src="https://image.tmdb.org/t/p/w500{{ provider.logo_path }}" alt="">{{ provider.provider_name }}
+                                        </span>
+                                    {% endfor %}
+                                </div>
+                            {% elseif movie.providers.US.Paid is defined and movie.providers.US.Paid is not empty %}
+                                <div class="d-flex gap-2">
+                                    {% for provider in movie.providers.US.Paid %}
+                                        <span class="badge d-flex align-items-center p-1 pe-2 text-dark-emphasis bg-light-subtle border border-dark-subtle rounded-pill">
+                                            <img class="rounded-circle me-1" width="24" height="24" src="https://image.tmdb.org/t/p/w500{{ provider.logo_path }}" alt="">{{ provider.provider_name }}
+                                        </span>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
             {% endif %}
             {# bloc providers #}
 
             {# bloc cast #}
             {% if movie.actors is defined and movie.actors is not empty %}
-                <div class="row movie-real border">
-                    <span class="movie-real">Acteurs :</span>
-                </div>
-                <div class="row actors-container border">
-                    <div class="d-flex flex-wrap gap-2">
-                        {% for actor in movie.actors %}
-                            <input type="button" value="{{ actor.name }}" class="btn movie-real-actors"disabled>
-                        {% endfor %}
+                <div class="mb-5">
+                    <div class="row movie-real border">
+                        <span class="movie-real">Acteurs :</span>
+                    </div>
+                    <div class="row actors-container border">
+                        <div class="d-flex flex-wrap gap-2">
+                            {% for actor in movie.actors %}
+                                <input type="button" value="{{ actor.name }}" class="btn movie-real-actors"disabled>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
             {% endif %}
