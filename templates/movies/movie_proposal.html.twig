@@ -20,7 +20,7 @@
     {# bloc titre #}
 
     {# bloc subtitle #}
-        <div class="row movie-subtitle border">
+    <div class="row movie-subtitle border">
             {{ movie.releaseDate | date('Y') }} &nbsp;·&nbsp;
             {{ movie.originCountries.0 }} &nbsp;·&nbsp;
             {% for genre in movie.genres %}
@@ -194,6 +194,7 @@
                     {% endif %}
                 </div>
             </div>
+        </div>
         {# bloc videos #}
     </div>
     {# bloc content #}
@@ -208,5 +209,4 @@
     {# bloc button #}
 
 </div>
-
 {% endblock %}
