@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Form\WillRefinerType;
+use App\Handler\MovieRefinerHandler;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Attribute\Route;
@@ -24,31 +26,16 @@ class MovieController extends AbstractController
         $this->movieApiService = $movieApiService;
         $this->movieDataTransformer = $movieDataTransformer;
     }
-    
-    #[Route('/movies-old', name: 'list_movies')]
-    public function listMovies(EntityManagerInterface $entityManager): Response
-    {
-        $movies = $entityManager->getRepository(Movie::class)->findAll();
-        
-        $user = $this->getUser();
 
-        return $this->render('movies/listMovies.html.twig', [
-            'movies'=> $movies,
-            'user' => $user,
-        ]);
-    }
-
-    #[Route('/movie', name: 'movie')]
+    #[Route('/movie/{id}', name: 'movie', defaults: ['id' => null])]
     public function movie(
         MovieDetailApiHandler $movieHandler,
-        Request $request,
-        MovieApiService $movieApiService,
-        MovieApiDataTransformer $movieDataTransformer
+        ?int $id
     ): Response {
-        
+
         $user = $this->getUser();
-        $movie = $movieHandler->handle();
-//        dd($movie->getVideos());
+
+        $movie = $movieHandler->handle($id);
 
         return $this->render('movies/movie_proposal.html.twig', [
             'nav_color' => 'movie-home-link',
@@ -56,6 +43,47 @@ class MovieController extends AbstractController
             'user' => $user,
             'movie' => $movie,
             'tabclass' => 'active-movie',
+        ]);
+    }
+
+    #[Route('/will-refiner', name: 'movie_will_refiner')]
+    public function movieWillRefiner(Request $request, MovieRefinerHandler $movieRefinerHandler,)
+    {
+        $user = $this->getUser();
+
+        $form = $this->createForm(WillRefinerType::class, $user);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+//            dd($data);
+            $id = $data['id'] ?? null;
+
+            return $this->redirectToRoute('movie', [
+                'id' => $id,
+            ]);
+        }
+
+        return $this->render('movies/movie_will_refiner.html.twig', [
+            'form' => $form,
+            'nav_color' => 'movie-home-link',
+            'backgroundClass' => 'movie-background-form',
+            'user' => $user,
+            'tabclass' => 'active-movie',
+        ]);
+    }
+
+    #[Route('/movies-old', name: 'list_movies')]
+    public function listMovies(EntityManagerInterface $entityManager): Response
+    {
+        $movies = $entityManager->getRepository(Movie::class)->findAll();
+
+        $user = $this->getUser();
+
+        return $this->render('movies/listMovies.html.twig', [
+            'movies'=> $movies,
+            'user' => $user,
         ]);
     }
 

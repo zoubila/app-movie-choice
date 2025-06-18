@@ -18,24 +18,29 @@ class MovieDetailApiHandler
         $this->MovieApiDataTransformer = $movieDataTransformer;
     }
 
-    public function handle($locale = 'fr-FR'): Movie
+    public function handle($id, $locale = 'fr-FR'): Movie
     {
-        $totalPages = 500;
-        $page = rand(1, $totalPages);
+        if($id) {
+            $randomMovieId = $id;
+        } else {
+            $filtersGeneralApiCall = [
+                'include_adult' => false,
+                'include_video' => true,
+                'sort_by' => 'popularity.desc',
+            ];
+            $apiContent = $this->movieApiService->makeApiRequest('discover/movie', $filtersGeneralApiCall);
 
-        $filtersGeneralApiCall = [
-            'include_adult' => false,
-            'include_video' => true,
-            'page' => $page,
-            'sort_by' => 'popularity.desc',
-        ];
+            if($apiContent['total_pages'] > 500){
+                $totalPages = $apiContent['total_pages'] ?? 500;
+                $page = rand(1, $totalPages);
+                $filtersGeneralApiCall['page'] = $page;
+                $apiContent = $this->movieApiService->makeApiRequest('discover/movie', $filtersGeneralApiCall);
+            }
 
-        // Fetch random movie ID
-        $apiContent = $this->movieApiService->makeApiRequest('discover/movie', $filtersGeneralApiCall);
+            $randomMovieId = $apiContent['results'][array_rand($apiContent['results'])]['id'];
+//            $randomMovieId = 427641;
+        }
 
-        $randomMovieId = $apiContent['results'][array_rand($apiContent['results'])]['id'];
-        $randomMovieId = 427641;
-        // Fetch all related data
         $movieDetails = $this->movieApiService->makeApiRequest("/movie/$randomMovieId", [
             'language' => $locale
         ]);

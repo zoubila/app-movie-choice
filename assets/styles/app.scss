@@ -18,6 +18,13 @@ body.movie-background {
   background-attachment: fixed; /* Optionnel : pour un effet de parallaxe */
 }
 
+body.movie-background-form {
+    background:
+          url('/public/images/background_funnel_2.png') lightgray 50% / cover no-repeat;
+  background-position: center; /* Centre l'image */
+  background-attachment: fixed; /* Optionnel : pour un effet de parallaxe */
+}
+
 nav {
   display: flex;
   flex-direction: column; /* Garder les liens en colonne */
@@ -520,7 +527,7 @@ z-index: 2;
 
 .video-thumb {
   transition: border 0.2s;
-  border-radius: 5%;
+  border-radius: 5px;
 }
 .video-thumb:hover {
   border: 2px solid #007bff;
@@ -534,7 +541,7 @@ z-index: 2;
   width: 100%;
   min-height: 180px;
   aspect-ratio: 16/9;
-  border-radius: 5%;
+  border-radius: 5px;
 }
 @media (max-width: 1200px) {
   #main-video-player iframe {

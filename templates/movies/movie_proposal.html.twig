@@ -20,7 +20,7 @@
     {# bloc titre #}
 
     {# bloc subtitle #}
-    <div class="row movie-subtitle border">
+    <div class="row movie-subtitle">
             {{ movie.releaseDate | date('Y') }} &nbsp;·&nbsp;
             {{ movie.originCountries.0 }} &nbsp;·&nbsp;
             {% for genre in movie.genres %}
@@ -31,9 +31,9 @@
     {# bloc subtitle #}
 
     {# bloc content #}
-    <div class="row border">
+    <div class="row">
         {# bloc affiche film #}
-        <div class="col-3 poster-movie border">
+        <div class="col-3 poster-movie">
                 <img
                   src="https://image.tmdb.org/t/p/w500{{ movie.posterPath }}"
                   alt="{{ movie.titles.original_title }}"
@@ -43,24 +43,24 @@
         {# bloc affiche film #}
         
         {# bloc note #}
-        <div class="col-6 border movie-note-container">
+        <div class="col-6 movie-note-container">
             {# bloc circle_note and real #}
-            <div class="row border mb-2">
+            <div class="row mb-2">
                 {# bloc circle_note #}
-                    <div class="col-3 progress-circle-container border" data-score="{{ (movie.voteAverage * 10)|round }}">
+                    <div class="col-3 progress-circle-container" data-score="{{ (movie.voteAverage * 10)|round }}">
                         <svg class="circle-container" viewBox="0 0 100 100">
-                            <circle class="background-circle" cx="50%" cy="50%" r="40%" />
-                            <circle class="progress" cx="50%" cy="50%" r="40%" />
+                            <circle class="background-circle" cx="50%" cy="50%" r="40%"></circle>
+                            <circle class="progress" cx="50%" cy="50%" r="40%"></circle>
                         </svg>
                         <div class="score-label">{{ (movie.voteAverage * 10)|round }}%</div>
                     </div>
                 {# bloc circle_note #}
                 {# bloc real #}
                     <div class="col-9">
-                        <div class="movie-real border">
+                        <div class="movie-real">
                             <span class="movie-real">Réalisateur :</span>
                         </div>
-                        <div class="movie-real-name border">
+                        <div class="movie-real-name">
                             {% for director in movie.directors %}
                                 {{ director.name }}{% if not loop.last %}-{% endif %}
                             {% endfor %}
@@ -73,10 +73,10 @@
             {# bloc synopsis #}
             {% if movie.overview %}
                 <div class="mb-3">
-                    <div class="row movie-real border">
+                    <div class="row movie-real">
                         <span class="movie-real">Synopsis :</span>
                     </div>
-                    <div class="row movie-real-name border">
+                    <div class="row movie-real-name">
                         {{ movie.overview }}
                     </div>
                 </div>
@@ -87,10 +87,10 @@
             {% if movie.providers.FR is defined or movie.providers.US is defined %}
                 <div class="mb-3">
                     {% if movie.providers.FR is defined %}
-                        <div class="row movie-real border">
+                        <div class="row movie-real">
                             <span class="movie-real">Plateformes : {% if movie.providers.FR.Sub is defined and movie.providers.FR.Sub is not empty %}<i>abonnement français</i>{% else %}<i>Pas de bol, y'a que de la VOD en France</i>{% endif %}</span>
                         </div>
-                        <div class="row movie-real-providers border">
+                        <div class="row movie-real-providers">
                             {% if movie.providers.FR.Sub is defined and movie.providers.FR.Sub is not empty %}
                                 <div class="d-flex gap-2">
                                     {% for provider in movie.providers.FR.Sub %}
@@ -110,10 +110,10 @@
                             {% endif %}
                         </div>
                     {% elseif movie.providers.US is defined %}
-                        <div class="row movie-real border">
+                        <div class="row movie-real">
                             <span class="movie-real">Plateformes : {% if movie.providers.US.Sub is defined and movie.providers.US.Sub is not empty %}<i>abonnement US</i>{% else %}<i>Pas de bol, y'a que de la VOD aux US</i>{% endif %}</span>
                         </div>
-                        <div class="row movie-real-providers border">
+                        <div class="row movie-real-providers">
                             {% if movie.providers.US.Sub is defined and movie.providers.US.Sub is not empty %}
                                 <div class="d-flex gap-2">
                                     {% for provider in movie.providers.US.Sub %}
@@ -140,13 +140,13 @@
             {# bloc cast #}
             {% if movie.actors is defined and movie.actors is not empty %}
                 <div class="mb-5">
-                    <div class="row movie-real border">
+                    <div class="row movie-real">
                         <span class="movie-real">Acteurs :</span>
                     </div>
-                    <div class="row actors-container border">
+                    <div class="row actors-container">
                         <div class="d-flex flex-wrap gap-2">
                             {% for actor in movie.actors %}
-                                <input type="button" value="{{ actor.name }}" class="btn movie-real-actors"disabled>
+                                <input type="button" value="{{ actor.name }}" class="btn movie-real-actors" disabled>
                             {% endfor %}
                         </div>
                     </div>
@@ -157,8 +157,8 @@
         {# bloc note #}
 
         {# bloc videos #}
-        <div class="col-3 movie-videos border">
-            <div class="movie-videos border">
+        <div class="col-3 movie-videos">
+            <div class="movie-videos">
                 <div class="col-12">
                     <h3 class="movie-real">Bande annonce :</h3>
                     {% if movie.videos is defined and movie.videos is not empty %}
@@ -176,11 +176,12 @@
                         {% if movie.videos|length > 1 %}
                             <div class="row g-2" id="video-thumbnails">
                                 {% for video in movie.videos %}
-                                    <div class="col-6 col-md-4 col-lg-4">
+                                    <div class="col-6 col-md-4 col-lg-4" data-toggle="tooltip" data-html="true"
+                                         title="{{ video.name }}">
                                         <img
                                             src="https://img.youtube.com/vi/{{ video.key }}/mqdefault.jpg"
                                             alt="{{ video.name }}"
-                                            class="video-thumb img-fluid border"
+                                            class="video-thumb img-fluid"
                                             style="cursor: pointer; display: block; width: 100%; height: auto;"
                                             data-key="{{ video.key }}"
                                             data-title="{{ video.name }}"
@@ -200,10 +201,10 @@
     {# bloc content #}
 
     {# bloc button #}
-    <div class="row button-bot-container justify-center border">
+    <div class="row button-bot-container justify-center">
         <div class="col-5 movie-account-button d-flex justify-content-between">
             <a href="{{ path('movie') }}" class="a-left-risk flex-grow-1 text-center text-nowrap" id="find-movie-btn">TROUVE MOI UN NOUVEAU FILM</a>
-            <a href="#" class="a-right-mood flex-grow-1 text-center text-nowrap">J'AI CHANGé DE MOOD</a>
+            <a href="{{ path('movie_will_refiner') }}" class="a-right-mood flex-grow-1 text-center text-nowrap">J'AI CHANGé DE MOOD</a>
         </div>
     </div>
     {# bloc button #}
