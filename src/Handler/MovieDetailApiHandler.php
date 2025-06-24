@@ -24,16 +24,17 @@ class MovieDetailApiHandler
             $randomMovieId = $id;
         } else {
             $filtersGeneralApiCall = [
-                'include_adult' => false,
+                'include_adult' => true,
                 'include_video' => true,
+//                'certification' => 'R18',
+//                'certification_country' => 'FR',
+                'page' => rand(1, 500),
                 'sort_by' => 'popularity.desc',
             ];
             $apiContent = $this->movieApiService->makeApiRequest('discover/movie', $filtersGeneralApiCall);
 
-            if($apiContent['total_pages'] > 500){
-                $totalPages = $apiContent['total_pages'] ?? 500;
-                $page = rand(1, $totalPages);
-                $filtersGeneralApiCall['page'] = $page;
+            if($apiContent['total_pages'] < 500){
+                $filtersGeneralApiCall['page'] = rand(1, $apiContent['total_pages']);
                 $apiContent = $this->movieApiService->makeApiRequest('discover/movie', $filtersGeneralApiCall);
             }
 
