@@ -10,6 +10,20 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.scss';
 
+import TomSelect from 'tom-select';
+
+document.addEventListener('DOMContentLoaded', () => {
+    const selects = document.querySelectorAll('.tom-select');
+
+    selects.forEach((select) => {
+        new TomSelect(select, {
+            plugins: ['remove_button'],
+            create: false,
+            allowEmptyOption: true,
+        });
+    });
+});
+
 // Importer le CSS de Bootstrap
 // import 'bootstrap/dist/css/bootstrap.min.css';
 

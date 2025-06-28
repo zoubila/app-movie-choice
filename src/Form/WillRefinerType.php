@@ -56,64 +56,77 @@ class WillRefinerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('language', ChoiceType::class, [
-                'choices' => ['Français' => 'fr', 'English' => 'en'],
-                'label' => 'Langue des résultats',
-                'required' => false,
-            ])
-            ->add('region', TextType::class, [
-                'label' => 'Région',
-                'required' => false,
-            ])
-            ->add('include_adult', CheckboxType::class, [
-                'label' => 'Inclure les contenus adultes',
-                'required' => false,
-            ])
-            ->add('certification', ChoiceType::class, [
-                'choices' => $this->getCertificationChoices(),
-                'label' => 'Certification',
-                'required' => false,
-            ])
-            ->add('include_video', CheckboxType::class, [
-                'label' => 'Inclure les vidéos',
-                'required' => false,
-            ])
-            ->add('certification_country', CountryType::class, [
-                'label' => 'Pays de certification',
-                'required' => false,
-            ])
-            ->add('certification_lte', TextType::class, [
-                'label' => 'Certification maximale',
-                'required' => false,
-            ])
-            ->add('primary_release_year', IntegerType::class, [
-                'label' => 'Année de sortie principale',
-                'required' => false,
-            ])
-            ->add('sort_by', ChoiceType::class, [
-                'choices' => [
-                    'Popularité descendante' => 'popularity.desc',
-                    'Popularité ascendante' => 'popularity.asc',
-                    'Date de sortie récente' => 'release_date.desc',
-                    'Date de sortie ancienne' => 'release_date.asc',
-                ],
-                'label' => 'Trier par',
-                'required' => false,
-            ])
-            ->add('vote_average_gte', NumberType::class, [
-                'label' => 'Note minimale',
-                'required' => false,
-                'scale' => 1,
-            ])
+//            ->add('language', ChoiceType::class, [
+//                'choices' => ['Français' => 'fr', 'English' => 'en'],
+//                'label' => 'Langue des résultats',
+//                'required' => false,
+//            ])
+//            ->add('region', TextType::class, [
+//                'label' => 'Région',
+//                'required' => false,
+//            ])
+//            ->add('include_adult', CheckboxType::class, [
+//                'label' => 'Inclure les contenus adultes',
+//                'required' => false,
+//            ])
+//            ->add('certification', ChoiceType::class, [
+//                'choices' => $this->getCertificationChoices(),
+//                'label' => 'Certification',
+//                'required' => false,
+//            ])
+//            ->add('include_video', CheckboxType::class, [
+//                'label' => 'Inclure les vidéos',
+//                'required' => false,
+//            ])
+//            ->add('certification_country', CountryType::class, [
+//                'label' => 'Pays de certification',
+//                'required' => false,
+//            ])
+//            ->add('certification_lte', TextType::class, [
+//                'label' => 'Certification maximale',
+//                'required' => false,
+//            ])
+//            ->add('primary_release_year', IntegerType::class, [
+//                'label' => 'Année de sortie principale',
+//                'required' => false,
+//            ])
+//            ->add('sort_by', ChoiceType::class, [
+//                'choices' => [
+//                    'Popularité descendante' => 'popularity.desc',
+//                    'Popularité ascendante' => 'popularity.asc',
+//                    'Date de sortie récente' => 'release_date.desc',
+//                    'Date de sortie ancienne' => 'release_date.asc',
+//                ],
+//                'label' => 'Trier par',
+//                'required' => false,
+//            ])
+//            ->add('vote_average_gte', NumberType::class, [
+//                'label' => 'Note minimale',
+//                'required' => false,
+//                'scale' => 1,
+//            ])
+//            ->add('with_genres', ChoiceType::class, [
+//                'choices' => $this->getGenreChoices(),
+//                'label' => 'Genres',
+//                'required' => false,
+//                'multiple' => true,
+//                'expanded' => false,
+//                'attr' => ['class' => 'tom-select']
+//            ])
             ->add('with_genres', ChoiceType::class, [
                 'choices' => $this->getGenreChoices(),
                 'label' => 'Genres',
                 'required' => false,
                 'multiple' => true,
-                'expanded' => false,
+                'expanded' => true,
+                'attr' => ['class' => 'genre-choice-group'],
+                'label_attr' => ['class' => 'category-label']
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Propose moi un film',
+                'attr' => [
+                    'class' => 'submit-form-button',
+                ]
             ])
         ;
     }

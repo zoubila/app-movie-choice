@@ -1,6 +1,8 @@
 
 @use "partials/loader.scss";
+@use "partials/_form.scss";
 @import "~bootstrap/scss/bootstrap";
+@import "~tom-select/dist/css/tom-select.bootstrap5.css";
 @import url('https://fonts.googleapis.com/css2?family=Amarante&family=Nothing+You+Could+Do&family=Staatliches&family=Raleway&display=swap');
 
 body {

@@ -5,13 +5,25 @@
 {% block body %}
     <div class="row border">
         <div class="col-6 border">
-
+            <div class="container movie-layout">
+                <h1 class="text-center form-text-left-title">1/2</h1>
+                <h1 class="text-center form-text-left-title">Veut-il s’envoler vers des mondes lointains
+                    ou rire aux éclats en terre connue ?
+                    Où ira-t-il chercher ces instants suspendus ?</h1>
+                <br>
+                <p class="text-center form-text-left-subtitle">D'aucun ont des aventures... Je suis une aventure.J’ai un mood, laisse-moi exprimer ce que je ressens, J’aime le rique, propose moi un film au hasard</p>
+            </div>
         </div>
         <div class="col-6 border">
-        <div class="container movie-layout">
-            {{ form_start(form) }}
-            {{ form_end(form) }}
-        </div>
+            <div class="container movie-layout">
+                {{ form_start(form) }}
+                    <div class="form-group">
+                        {{ form_row(form.with_genres) }}
+                    </div>
+                    <br>
+                    {{ form_row(form.submit) }}
+                {{ form_end(form) }}
+            </div>
         </div>
     </div>
 {% endblock %}

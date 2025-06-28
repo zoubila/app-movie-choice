@@ -56,9 +56,7 @@ class MovieController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-//            dd($data);
-            $id = $data['id'] ?? null;
+            $id = $movieRefinerHandler->handle($form->getData());
 
             return $this->redirectToRoute('movie', [
                 'id' => $id,

@@ -1,0 +1,116 @@
+                          //////////////////
+                          // texte gauche //
+                          //////////////////
+
+.form-text-left-title {
+  color: var(--Colors-Primary-base, #FF5154);
+  align-self: stretch;
+  font-family: Amarante, serif;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 78%; /* 68.64px */
+  letter-spacing: -5px;
+}
+.form-text-left-subtitle {
+  color: #333;
+  font-family: Raleway, serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%; /* 36px */
+}
+
+                            //////////////////
+                           //  Zone form  //
+                          ////////////////
+.category-label {
+  padding-left: 0.4em;
+  color: var(--Colors-Black-base, #828282);
+  font-family: Raleway;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+                            ///////////
+                           // genre //
+                          ///////////
+
+.genre-choice-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.genre-choice-group input[type="checkbox"] {
+  display: none;
+}
+
+.genre-choice-group label {
+  font-family: Raleway, serif;
+  border: 2px solid #ccc;
+  border-radius: 30px;
+  padding: 0.5rem 1.2rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  color: #333;
+  background-color: white;
+  &:hover {
+    background-color: #fbe4e4;
+    border-color: #f45c5c;
+  }
+}
+
+.genre-choice-group input[type="checkbox"]:checked + label {
+  border-color: #f45c5c;
+  background-color: #ffecec;
+  color: #f45c5c;
+  font-weight: 700;
+}
+
+                            ////////////
+                           // submit //
+                          ////////////
+
+.submit-form-button {
+  display: inline-block;
+  padding: 7px 35px;
+  text-align: center;
+  border-radius: 51px;
+  background: var(--Colors-Black-weak, #222);
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  color: var(--Colors-White-base, #FFF);
+  font-family: Raleway, serif;
+  font-size: 18px;
+  font-style: normal;
+  line-height: normal;
+  text-transform: uppercase;
+  &:hover {
+    padding: 7px 35px;
+    background: var(--Colors-Black-base, #828282);
+    color: var(--Colors-White-base, #FFF);
+    font-family: Raleway, serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+  }
+  &:focus{
+    background: var(--Colors-Black-strong, #020202);
+    color: var(--Colors-White-base, #FFF);
+    font-family: Raleway, serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+  }
+}
