@@ -45,5 +45,22 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+    const slider = document.getElementById('decade-slider');
+    const hiddenInput = document.getElementById('form_decade');
+    const label = document.getElementById('decade-label');
+
+    function updateDecade(year) {
+        const decadeLabel = `${year}–${year + 9}`;
+        label.textContent = decadeLabel;
+        hiddenInput.value = `${year}s`;
+    }
+
+    updateDecade(parseInt(slider.value));
+
+    slider.addEventListener('input', function () {
+        updateDecade(parseInt(slider.value));
+    });
+});
 
 

@@ -5,7 +5,7 @@
 {% block body %}
     <div class="row border">
         <div class="col-6 border">
-            <div class="container movie-layout">
+            <div class="container movie-layout" id="step-one">
                 <h1 class="text-center form-text-left-title">1/2</h1>
                 <h1 class="text-center form-text-left-title">Veut-il s’envoler vers des mondes lointains
                     ou rire aux éclats en terre connue ?
@@ -19,6 +19,27 @@
                 {{ form_start(form) }}
                     <div class="form-group">
                         {{ form_row(form.with_genres) }}
+{#                        {{ form_row(form.decade) }}#}
+                        <div class="decade-slider-wrapper text-center mt-4">
+                            <label for="decade-slider" class="form-label h5">Décennie</label>
+                            <div class="slider-container">
+                                <input type="range"
+                                       class="form-range styled-decade-slider"
+                                       id="decade-slider"
+                                       name="decade-slider"
+                                       min="1930"
+                                       max="2020"
+                                       step="10"
+                                       value="2000">
+                                <div class="slider-labels d-flex justify-content-between mt-2">
+                                    <span>1930</span>
+                                    <span>2025</span>
+                                </div>
+                            </div>
+                            <div id="decade-label" class="mt-2 fw-bold">2000–2009</div>
+                        </div>
+
+                        <input type="hidden" name="will_refiner[decade]" id="form_decade">
                     </div>
                     <br>
                     {{ form_row(form.submit) }}

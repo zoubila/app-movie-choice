@@ -12,6 +12,8 @@ class MovieDetailApiHandler
     private MovieApiDataTransformer $MovieApiDataTransformer;
     public string $locale;
 
+    private const PICTURE_FALLBACK = '/build/images/siege_vide.png';
+
     public function __construct(MovieApiService $movieApiService, MovieApiDataTransformer $movieDataTransformer)
     {
         $this->movieApiService = $movieApiService;
@@ -26,6 +28,7 @@ class MovieDetailApiHandler
             $filtersGeneralApiCall = [
                 'include_adult' => true,
                 'include_video' => true,
+                'watch_region' => 'FR',
 //                'certification' => 'R18',
 //                'certification_country' => 'FR',
                 'page' => rand(1, 500),
@@ -40,6 +43,7 @@ class MovieDetailApiHandler
 
             $randomMovieId = $apiContent['results'][array_rand($apiContent['results'])]['id'];
 //            $randomMovieId = 427641;
+//            $randomMovieId = 430378; // films sans images
         }
 
         $movieDetails = $this->movieApiService->makeApiRequest("/movie/$randomMovieId", [
@@ -71,7 +75,9 @@ class MovieDetailApiHandler
             new \DateTime($movieDetails['release_date']),
             $movieDetails['adult'],
             $movieDetails['origin_country'],
-            $movieDetails['poster_path'] ?? $movieDetails['backdrop_path'] ?? null,
+            $movieDetails['poster_path']
+                ?? $movieDetails['backdrop_path']
+                ?? self::PICTURE_FALLBACK,
             $movieDetails['runtime'],
             $movieDetails['vote_average'],
             $directors ?? [],

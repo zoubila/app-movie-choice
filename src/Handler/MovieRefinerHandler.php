@@ -22,6 +22,29 @@ class MovieRefinerHandler
     {
         $tmdbFilters = [];
 
+        if (!empty($filters['decade'])) {
+            switch ($filters['decade']) {
+                case '1990s':
+                    $tmdbFilters['primary_release_date.gte'] = '1990-01-01';
+                    $tmdbFilters['primary_release_date.lte'] = '1999-12-31';
+                    break;
+                case '2000s':
+                    $tmdbFilters['primary_release_date.gte'] = '2000-01-01';
+                    $tmdbFilters['primary_release_date.lte'] = '2009-12-31';
+                    break;
+                case '2010s':
+                    $tmdbFilters['primary_release_date.gte'] = '2010-01-01';
+                    $tmdbFilters['primary_release_date.lte'] = '2019-12-31';
+                    break;
+                case '2020s':
+                    $tmdbFilters['primary_release_date.gte'] = '2020-01-01';
+                    $tmdbFilters['primary_release_date.lte'] = '2029-12-31';
+                    break;
+            }
+
+            unset($filters['primary_release_year']);
+        }
+
         // Adapter les noms aux paramètres TMDB
         $mapping = [
             'language' => 'language',
@@ -40,7 +63,7 @@ class MovieRefinerHandler
         foreach ($mapping as $formKey => $tmdbKey) {
             if (!empty($filters[$formKey])) {
                 if ($formKey === 'with_genres' && is_array($filters[$formKey])) {
-                    $tmdbFilters[$tmdbKey] = implode(',', $filters[$formKey]);
+                    $tmdbFilters[$tmdbKey] = implode('|', $filters[$formKey]);
                 } else {
                     $tmdbFilters[$tmdbKey] = $filters[$formKey];
                 }

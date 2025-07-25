@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -90,6 +91,29 @@ class WillRefinerType extends AbstractType
 //                'label' => 'Année de sortie principale',
 //                'required' => false,
 //            ])
+//            ->add('primary_release_year', ChoiceType::class, [
+//                'label' => 'Année de sortie',
+//                'required' => false,
+//                'choices' => array_combine(
+//                    $years = range(date('Y'), 1900),
+//                    $years
+//                ),
+//                'placeholder' => 'Choisissez une année',
+//            ])
+//            ->add('decade', ChoiceType::class, [
+//                'label' => 'Décennie',
+//                'required' => false,
+//                'choices' => [
+//                    '1990–1999' => '1990s',
+//                    '2000–2009' => '2000s',
+//                    '2010–2019' => '2010s',
+//                    '2020–2029' => '2020s',
+//                ],
+//                'placeholder' => 'Choisissez une décennie',
+//            ])
+            ->add('decade', HiddenType::class, [
+                'required' => false,
+            ])
 //            ->add('sort_by', ChoiceType::class, [
 //                'choices' => [
 //                    'Popularité descendante' => 'popularity.desc',
@@ -104,14 +128,6 @@ class WillRefinerType extends AbstractType
 //                'label' => 'Note minimale',
 //                'required' => false,
 //                'scale' => 1,
-//            ])
-//            ->add('with_genres', ChoiceType::class, [
-//                'choices' => $this->getGenreChoices(),
-//                'label' => 'Genres',
-//                'required' => false,
-//                'multiple' => true,
-//                'expanded' => false,
-//                'attr' => ['class' => 'tom-select']
 //            ])
             ->add('with_genres', ChoiceType::class, [
                 'choices' => $this->getGenreChoices(),
