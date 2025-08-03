@@ -1,46 +1,49 @@
-# Makefile pour projet Symfony + Docker
+# Makefile pour projet Symfony + Docker unifié à la racine
 
 # Lancer les conteneurs en arrière-plan avec build
 up:
-	cd docker && docker compose up -d --build
+	docker compose up -d --build
 
 # Arrêter les conteneurs
 down:
-	cd docker && docker compose down
+	docker compose down
 
-# Redémarrer proprement en supprimant les volumes (base de données etc.)
+# Redémarrer proprement en supprimant les volumes (base de données, etc.)
 reset:
-	cd docker && docker compose down -v
-	cd docker && docker compose up -d --build
+	docker compose down -v
+	docker compose up -d --build
 
-# Installer les dépendances PHP
+# Accéder à un shell bash dans le conteneur web
+bash:
+	docker exec -it symfony_web bash
+
+# Installer les dépendances PHP (dans le conteneur)
 composer-install:
 	docker exec -it symfony_web composer install
-
-# Lancer les migrations
-migrate:
-	docker exec -it symfony_web php bin/console doctrine:migrations:migrate
 
 # Créer la base de données
 db-create:
 	docker exec -it symfony_web php bin/console doctrine:database:create
 
-# Installer les dépendances JS
-yarn-install:
-	yarn install
-
-# Compiler les assets en prod
-build:
-	yarn build
-
-# Lancer le dev-server Webpack Encore
-dev-server:
-	yarn dev-server
-
-# Accès bash dans le conteneur Symfony
-bash:
-	docker exec -it symfony_web bash
+# Lancer les migrations
+migrate:
+	docker exec -it symfony_web php bin/console doctrine:migrations:migrate
 
 # Exécuter les tests PHPUnit
 test:
 	docker exec -it symfony_web php bin/phpunit
+
+# Installer les dépendances JS (sur la machine hôte)
+yarn-install:
+	yarn install
+
+# Compiler les assets (production)
+build:
+	yarn build
+
+# Lancer le serveur de dev Webpack Encore (avec hot reload)
+dev-server:
+	yarn dev-server
+
+# Initialisation complète (PHP + JS + DB)
+init: up composer-install yarn-install db-create migrate build
